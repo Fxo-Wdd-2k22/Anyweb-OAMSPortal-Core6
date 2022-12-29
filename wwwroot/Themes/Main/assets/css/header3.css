@@ -1,0 +1,92 @@
+﻿.header-right-sub-area {
+    position: relative;
+    height: 45px
+}
+
+    .header-right-sub-area::before {
+        width: 0;
+        height: 0;
+        
+        content: "";
+        position: absolute;
+        left: -115px;
+    }
+
+    .header-right-sub-area::before {
+        width: 1000px;
+        /* height: 300px; */
+        content: "";
+        position: absolute;
+        left: -51px;
+        z-index: -1;
+        top: -33px;
+        line-height: 276px;
+        background: #faac13;
+        height: 110px;
+    }
+
+.top-right-call-icon {
+    line-height: 20px;
+    /* padding-top: 10px; */
+    width: 60px;
+    position: absolute;
+    height: 60px;
+    background: #faac13;
+    text-align: center;
+    line-height: 64px;
+    border-radius: 100px;
+    padding-left: 10px;
+    left: -81px;
+    border: 4px solid #FFF;
+}
+@media(max-width:991px){
+    .header-right-sub-area {
+       
+        height: 62px;
+    }
+
+}
+@media(max-width:768px){
+    .top-right-call-icon {
+        line-height: 20px;
+        /* padding-top: 10px; */
+        width: 50px;
+        position: absolute;
+        height: 50px;
+        background: #faac13;
+        text-align: center;
+        line-height: 47px;
+        border-radius: 100px;
+        padding-left: 10px;
+        left: -81px;
+        border: 4px solid #FFF;
+    }
+}
+@media(max-width:440px){
+    .header-right-sub-area::before {
+        width: 1000px;
+        /* height: 300px; */
+        border-bottom: 110px solid #faac13;
+        border-left: 55px solid transparent;
+        content: "";
+        position: absolute;
+        left: -49px;
+        z-index: -1;
+        top: -33px;
+        line-height: 276px;
+    }
+    .top-right-call-icon {
+        line-height: 20px;
+        /* padding-top: 10px; */
+        width: 38px;
+        position: absolute;
+        height: 38px;
+        background: #faac13;
+        text-align: center;
+        line-height: 34px;
+        border-radius: 100px;
+        padding-left: 8px;
+        left: -42px;
+        border: 4px solid #FFF;
+    }
+}

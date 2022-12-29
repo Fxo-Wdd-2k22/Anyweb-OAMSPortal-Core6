@@ -1,0 +1,176 @@
+﻿@model ApplicationViewModel
+@{
+    int subcount = 0;
+    int Compltete = 0;
+}
+@foreach (var parent in Model.Features.Where(x => x.ParentId == null))
+{
+    <fieldset class="h-100 bg-white rounded  shadow-sm text-right position-relative mt-0" style="overflow:hidden">
+        <div class=" profilepage text-left">
+            <div class="row ">
+                <div class="col-12 col-lg-4 col-md-5 ">
+                    <div class="profile-list h-100">
+                        <ul class="nav nav-tabs responsive-tabs" role="tablist">
+
+                            @foreach (var child in Model.Features.Where(x => x.ParentId == parent.FeatureId))
+                            {
+                                if (Model.ApplicationFeature?.FeatureId > child.FeatureId)
+                                {
+                                    <li class="nav-item">
+                                        <a class="count_@subcount nav-link  @(Model.ApplicationFeature?.FeatureId == child.FeatureId ? "active" : "")" data-toggle="tab" role="tab" data-url="/@child.Controller/@child.Action" id="count_@subcount" onclick="OpenTab('/@child.Controller/@child.Action', '@subcount')" style="cursor:pointer">
+
+                                            <div class="d-flex">
+                                                <i class="fas fa-school"></i>
+                                                <div>
+                                                    <p> @child.Title</p>
+                                                    <span class="badge badge-success">Completed</span>
+                                                </div>
+                                            </div>
+
+                                        </a>
+                                        <span style="display:none">
+                                            @(subcount++)
+                                            @(Compltete++)
+                                        </span>
+                                    </li>
+                                }
+                                else if (Model.ApplicationFeature?.FeatureId == child.FeatureId)
+                                {
+                                    if (child.Title != "Submit Form")
+                                    {
+                                        <li class="nav-item">
+                                            <a class="count_@subcount nav-link  @(Model.ApplicationFeature?.FeatureId == child.FeatureId ? "active" : "")" data-toggle="tab"   role="tab" data-url="/@child.Controller/@child.Action" id="count_@subcount" onclick="OpenTab('/@child.Controller/@child.Action', '@subcount')" style="cursor:pointer">
+
+                                                <div class="d-flex">
+                                                    <i class="fas fa-school"></i>
+                                                    <div>
+                                                        <p> @child.Title</p>
+                                                        <span class="badge badge-primary">In Progress</span>
+                                                    </div>
+                                                </div>
+
+                                            </a>
+                                            <span style="display:none">
+                                                @(subcount++)
+                                            </span>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item">
+                                            <a class="count_@subcount nav-link disabled  @(Model.ApplicationFeature?.FeatureId == child.FeatureId ? "active" : "")" data-toggle="tab" role="tab" data-url="/@child.Controller/@child.Action" id="count_@subcount" onclick="OpenTab('/@child.Controller/@child.Action', '@subcount')">
+
+                                                <div class="d-flex">
+                                                    <i class="fas fa-school"></i>
+                                                    <div>
+                                                        <p> @child.Title</p>
+
+                                                    </div>
+                                                </div>
+
+                                            </a>
+                                            <span style="display:none">
+                                                @(subcount++)
+                                            </span>
+                                        </li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li class="nav-item">
+                                        <a class="count_@subcount nav-link disabled  @(Model.ApplicationFeature?.FeatureId == child.FeatureId ? "active" : "")" data-toggle="tab" role="tab" data-url="/@child.Controller/@child.Action" id="count_@subcount" @*onclick="OpenTab('/@child.Controller/@child.Action', '@subcount')"*@>
+
+                                            <div class="d-flex">
+                                                <i class="fas fa-school"></i>
+                                                <div>
+                                                    <p> @child.Title</p>
+                                                    <span class="badge badge-warning">Incomplete</span>
+                                                </div>
+                                            </div>
+
+                                        </a>
+                                        <span style="display:none">
+                                            @(subcount++)
+                                        </span>
+                                    </li>
+                                }
+
+
+
+
+                                <span class="dropdown-arrow"></span>
+                            }
+                        </ul>
+                    </div>
+                </div><!-- Tab panes -->
+                <div class="col-lg-8 col-md-7 mb-10">
+                    <div class="tab-content mt-3 h-100">
+                        <div class="tab-pane fade active show p-3" id="tabs-1" role="tabpanel">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Single Sidebar Wrap -->
+        </div>
+
+    </fieldset>
+}
+
+<script>
+    $(function () {
+
+        var url = $('[data-toggle="tab"]').data('url');
+        var url2 =  $('[data-toggle="tab"].active').data('url');
+        debugger;
+        GetData(url2);
+         if(@Compltete==1)
+            {
+             $(".progress-bar").attr('style', 'width:12.5% !important');
+             $(".skill-percent").html("12.5%");
+         }
+         else if(@Compltete==2)
+            {
+             $(".progress-bar").attr('style', 'width:25% !important');
+             $(".skill-percent").html("25%");
+         }
+         else if(@Compltete==3)
+            {
+             $(".progress-bar").attr('style', 'width:37.5% !important');
+             $(".skill-percent").html("37.5%");
+         }
+         else if(@Compltete==4)
+            {
+             $(".progress-bar").attr('style', 'width:50% !important');
+             $(".skill-percent").html("50%");
+         }
+        else if(@Compltete==5)
+            {
+             $(".progress-bar").attr('style', 'width:62.5% !important');
+             $(".skill-percent").html("62.5%");
+         }
+                 else if (@Compltete== 7)
+            {
+             //$(".progress-bar").attr('style', 'width:87.5% !important');
+             //$(".skill-percent").html("87.5%");
+             $(".form-control").attr('style', 'display:none !important');
+             $(".progress-bar").attr('style', 'width:100% !important');
+             $(".skill-percent").html("100%");
+
+         }
+         if (@Model.Approved == true)
+         {
+             $(".action-button").css("display", "none");
+           $(".progress-bar").attr('style', 'width:100% !important');
+           $(".skill-percent").html("100%");
+       }
+
+            $('.custom-file-input').on("change", function () {
+               var fileApplicantName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileApplicantName);
+           });
+
+
+       });
+</script>

@@ -1,0 +1,153 @@
+﻿@model ApplicationViewModel
+
+
+<form id="basic" method="post" asp-action="BasicInfo" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnBasicInfoSuccess">
+    <input type="hidden" asp-for="ApplicationId" />
+    <input type="hidden" asp-for="ContactId" />
+    <input type="hidden" asp-for="ApplicantId" />
+
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label class="control-label">Applicant Full Name <span class="text-danger">*</span></label>
+            <input type="text" asp-for="ApplicantDetail.ApplicantName" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="ApplicantDetail.ApplicantName"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">Date of Birth <span class="text-danger">*</span></label>
+            <input type="date" asp-for="DOB" class="form-control" id="Student_DateOfBirth" required />
+            <span class="badge badge-danger" asp-validation-for="DOB"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">NADRA B-FORM NO <span class="text-danger">*</span></label>
+            <input type="text" asp-for="BFormNo" class="form-control" required id="BFormNo" />
+            <span class="badge badge-danger" asp-validation-for="BFormNo"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">Place of Birth <span class="text-danger">*</span></label>
+            <input type="text" asp-for="PlaceofBirth" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="PlaceofBirth"></span>
+        </div>
+        <div class="col-md-4 form-group">
+                <label class="control-label">Country <span class="text-danger">*</span></label>
+                <select asp-for="CountryId" asp-items="Model.Country.Select(x => new SelectListItem { Text = x.CountryName, Value = x.CountryId.ToString() })" class="nice-select" required></select>
+                <span class="badge badge-danger" asp-validation-for="CountryId"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">Mother Tongue <span class="text-danger">*</span></label>
+            <input type="text" asp-for="MotherTongue" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="MotherTongue"></span>
+        </div>
+
+        <div class="col-md-4 form-group">
+            <label class="control-label">Academic Session</label>
+            <select asp-for="AcadSessionId" class="nice-select">
+                <option value="">Select Academic Session</option>
+                @foreach (var item in Model.AcadamicSessions)
+                {
+                    <option value="@item.AcadSessionId">@item.Title</option>
+                }
+            </select>
+            <span class="badge badge-danger" asp-validation-for="AcadSessionId"></span>
+        </div>
+
+        <div class="col-md-4 form-group">
+            <label class="control-label">Class</label>
+            <select asp-for="ClassId" class="nice-select" onchange="CheckCourseCombination()" id="ClassId">
+                <option value="">Select Class</option>
+                @foreach (var item in Model.AcademicClasses.Where(p => p.ApplyingIn == true))
+                {
+                    <option value="@item.ClassId">@item.ClassName</option>
+                }
+            </select>
+
+            <span class="badge badge-danger" asp-validation-for="ClassId"></span>
+        </div>
+        <div class="col-md-4 form-group" id="CourseCombination">
+            <label class="control-label">Course / Combination <span class="text-danger">*</span></label>
+            <select asp-for="CourseId" class="nice-select" >
+                <option value="">Select Course</option>
+                @foreach (var item in Model.Courses)
+                {
+                    <option value="@item.CourseId">@item.Title</option>
+                }
+            </select>
+            @*<select asp-for="CourseId" asp-items="Model.Courses.Select(x => new SelectListItem { Text = x.Title, Value = x.CourseId.ToString() })" class="nice-select"></select>*@
+            <span class="badge badge-danger" asp-validation-for="CourseId"></span>
+        </div>
+        @*<div class="col-md-4 form-group">
+            <label class="control-label">Studying In Class</label>
+            <select asp-for="CurrentlyStudyInId" class="nice-select">
+                <option value="">Select Studying In Class</option>
+                @foreach (var item in Model.AcademicClasses)
+                {
+                    <option value="@item.ClassId">@item.ClassName</option>
+                }
+            </select>
+
+            <span class="badge badge-danger" asp-validation-for="ClassId"></span>
+        </div>*@
+    </div>
+
+    <div class="row mt-2" style="display:none">
+        <div class="col-md-12">
+            <textarea class="form-control" asp-for="Description" rows="5">NIL</textarea>
+        </div>
+    </div>
+    <div class="col-12 mt-20">
+        <h6 class="font-weight-normal text-center" style="background: #3186fb; color: #FFF; border-radius: 100px; padding: 7px 17px 12px;">
+
+            Age as on (@Model.CustomValue.Value) (@Model.Age)
+        </h6>
+    </div>
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label class="control-label">Weight (KG) <span class="text-danger">*</span></label>
+            <input type="text" asp-for="WeightKG" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="WeightKG"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label"> Height in Ft <span class="text-danger">*</span></label>
+            <input type="text" asp-for="HeightFeet" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="HeightFeet"></span>
+        </div>
+        @*<div class="col-md-4 form-group">
+                <label class="control-label">Height (Inch)</label>
+                <input type="text" asp-for="HeightInch" class="form-control" />
+                <span class="badge badge-danger" asp-validation-for="HeightInch"></span>
+            </div>*@
+        <div class="col-md-4 form-group">
+            <label class="control-label">Religion <span class="text-danger">*</span></label>
+            <input type="text" asp-for="Relgion" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="Relgion"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">Sect </label>
+            <input type="text" asp-for="Sect" class="form-control" />
+            <span class="badge badge-danger" asp-validation-for="Sect"></span>
+        </div>
+        <div class="col-md-4 form-group">
+            <label class="control-label">Identification Mark  <span class="text-danger">*</span></label>
+            <input type="text" asp-for="IdMark" class="form-control" required />
+            <span class="badge badge-danger" asp-validation-for="IdMark"></span>
+        </div>
+    </div>
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="submit" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button">Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>
+
+<script src="~/js/jquery.mask.min.js"></script>
+<script>
+    $('#BFormNo').mask('99999-9999999-9');
+
+    function CheckCourseCombination() {
+        var x = $('select#ClassId option:selected').text();
+        if (x == '9th') {
+            $('#CourseCombination').css('display', 'none');
+        }
+        else {
+            $('#CourseCombination').css('display', 'block');
+        }
+    }
+</script>

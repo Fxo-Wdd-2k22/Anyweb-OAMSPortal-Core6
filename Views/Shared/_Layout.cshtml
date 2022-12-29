@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Online Application Portal
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Themes/Main/assets/img/favicon.png">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Online Application Portal" />
+
+    <meta name="description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="114x114">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="144x144">
+
+    <link rel="canonical" href="http://onlineapplicationform.mysitedemo.us/" />
+
+    <meta property="og:title" content="Online Application Portal">
+    <meta property="og:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+    <meta property="og:url" content="http://onlineapplicationform.mysitedemo.us/">
+    <meta property="og:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg">
+    <meta property="og:site_name" content="">
+
+    <meta name="twitter:card" content="summary" />
+
+    <meta name="twitter:title" content="Online Application Portal" />
+    <meta name="twitter:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address." />
+    <meta name="twitter:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg" />
+
+    <!--== Google Fonts ==-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,800,900%7CPlayfair+Display:400,400i"
+          rel="stylesheet">
+
+    <link href="~/Themes/Main/assets/css/all.css" rel="stylesheet" />
+    <!--=== All Plugins CSS ===-->
+    <link href="~/Themes/Main/assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="~/Themes/Main/assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="~/Themes/Main/assets/css/style.min.css" rel="stylesheet">
+
+    <!-- Modernizer JS -->
+    <script src="~/Themes/Main/assets/js/modernizr-2.8.3.min.js"></script>
+    <link href="~/Themes/Main/assets/css/header2.css" rel="stylesheet" />
+
+    <link href="~/Themes/Main/assets/css/responsive-tabs.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/css/dropzone.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/js/fileupload/image-uploader.css" rel="stylesheet" />
+    @*<link href="~/lib/jquery-nice-select/css/nice-select.min.css" rel="stylesheet" />*@
+    <style type="text/css">
+        .nice-select {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-area-wrapper black-header  sticky-header">
+        <div class="container">
+            <div class="top-header">
+                <div class="position-relative d-flex justify-content-between  align-items-center ">
+                    <div class="header-left-wrapper text-lg-left text-center">
+                        <!-- Start Logo Area Wrap -->
+                        <a href=".." class="logo-wrap d-block d-flex justify-content-center align-items-center">
+                            <img src="~/Logo/logo.png" alt="White Logo">
+                        </a>
+                        <!-- End Logo Area Wrap -->
+                    </div>
+                    <!-- Start Main Navigation Wrap -->
+                    <div class="d-flex  justify-content-end   mt-10">
+                        <ul class="list-unstyled ml-lg-60 d-none d-lg-block">
+                            <li class="mr-xl-60 mr-lg-60">
+                                <i class="fa fa-phone fa-fw mr-2"></i> <span>Call Now</span>0300-5311671
+                            </li>
+                            <li class="">
+                                <i class="fa fa-envelope fa-fw mr-2"></i><span>Email Us</span> info@ccf.edu.pk
+                            </li>
+                            <li class="ml-60 d-flex">
+                                @*<a href="#" class=""><i class="fa fa-facebook facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter twitter"></i></a>
+                                    <a href="#"><i class="fa fa-youtube youtube"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin linkedin"></i></a>*@
+                            </li>
+                        </ul>
+                        <ul>
+
+
+                            <li class="list-inline-item">
+                                <div class="profilebar">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle  d-flex justify-content-center align-items-center" href="#" role="button" id="profilelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @{
+                                                string Image = HttpContextAccessor.HttpContext.Session.GetString("Image");
+                                            }
+                                            @if (Image == null)
+                                            {
+                                                <div class="profileimg"><img src="/Themes/Main/assets/img/no-photo.jpg" class="img-fluid linkFeaturedImage1" alt="profile"></div>
+                                            }
+                                            else
+                                            {
+                                                <div class="profileimg"><img src="data:image/png;base64,@Image" class="img-fluid linkFeaturedImage1" alt="profile"></div>
+                                            }
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="profilelink">
+                                            <div class="dropdown-item">
+                                                <div class="profilename">
+                                                    <p>@HttpContextAccessor.HttpContext.Session.GetString("FullName")</p>
+                                                </div>
+                                            </div>
+                                            <div class="userbox">
+                                                <ul class="list-unstyled mb-0">
+                                                    <li class="media dropdown-item">
+                                                        <a href="/Home/Welcome" class="profile-icon">
+                                                            <div class="profile-icon">
+                                                                <i class="fas fa-user-circle"></i>
+                                                            </div>
+                                                            <p>
+                                                                My Profile<span>View Personal Profile Detail</span>
+                                                            </p>
+                                                        </a>
+                                                    </li>
+                                                    <li class="media dropdown-item">
+                                                            <a href="#" class="profile-icon">
+                                                                <div class="profile-icon">
+                                                                    <i class="far fa-address-card"></i>
+                                                                </div>
+                                                                <p>
+                                                                    Edit Profile <span>Modify your personal details.</span>
+                                                                </p>
+                                                            </a>
+                                                        </li>
+                                                        <li class="media dropdown-item">
+                                                            <a href="#" class="profile-icon">
+                                                                <div class="profile-icon">
+                                                                    <i class="fas fa-user-cog"></i>
+                                                                </div>
+                                                                <p> Account Settings <span>Mange your account parameters</span></p>
+                                                            </a>
+                                                        </li>
+
+                                                </ul>
+                                                <div class="clearfix"></div>
+                                                <div class="col-12 text-center pt-16 pb-16">
+                                                    <a href="@Url.Action("Logout","Account")" class="btn btn-event border-0 shadow-sm text-center" style="border-radius:40px; font-size:11px">Sign Out</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!--== End Header Area Wrapper ==-->
+    @RenderBody()
+    <!--== Start Footer Area Wrapper ==-->
+
+    <footer class="footer-wrapper">
+        <!-- Start Footer Widget Area -->
+        <div class="footer-widget-wrapper pt-0 ">
+            <div class="container">
+                <div class="col-sm-12 text-center rounded pt-0 pb-10" style=" color:#FFF">
+                    © Copyrights 2021 Cloud Campus - All Rights Reserved.<br /> <a href="http://anywebplatform.com/" target="_blank" style="text-transform:none; color:#FFF">
+                        Powered by
+                        <img src="~/Themes/Main/assets/img/powerdby.png" />
+                    </a>
+
+                    <!-- End Single Widget Wrap -->
+                </div>
+            </div>
+        </div>
+
+        <!-- End Footer Widget Area -->
+        <!-- Start Footer Bottom Area -->
+        <!-- End Footer Bottom Area -->
+    </footer>
+    
+    <!--=======================Javascript============================-->
+    <script src="~/Themes/Main/assets/js/vendor.js"></script>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+    <script type="text/javascript" src="~/Themes/Main/assets/js/smoothscroll.js"></script>
+    <script src="~/Themes/Main/assets/js/jquery.easing.min.js"></script>
+    <script src="~/Themes/Main/assets/js/responsive-tabs.js"></script>
+
+
+    <script>
+
+        (function ($) {
+
+            $('.nav-tabs').responsiveTabs();
+
+        })(jQuery);
+
+    </script>
+
+    <script id="rendered-js">
+        //jQuery time
+        var current_fs, next_fs, previous_fs; //fieldsets
+        var left, opacity, scale; //fieldset properties which we will animate
+        var animating; //flag to prevent quick multi-click glitches
+
+        $(".next").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            next_fs = $(this).parent().next();
+
+            //activate next step on progressbar using the index of next_fs
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+            //show the next fieldset
+            next_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale current_fs down to 80%
+                    scale = 1 - (1 - now) * 0.2;
+                    //2. bring next_fs from the right(50%)
+                    left = now * 50 + "%";
+                    //3. increase opacity of next_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({
+                        'transform': 'scale(' + scale + ')',
+                        'position': 'absolute'
+                    });
+
+                    next_fs.css({ 'left': left, 'opacity': opacity });
+                },
+                duration: 100,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+
+        });
+
+        $(".previous").click(function () {
+            if (animating) return false;
+            animating = true;
+
+            current_fs = $(this).parent();
+            previous_fs = $(this).parent().prev();
+
+            //de-activate current step on progressbar
+            $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+            //show the previous fieldset
+            previous_fs.show();
+            //hide the current fieldset with style
+            current_fs.animate({ opacity: 0 }, {
+                step: function (now, mx) {
+                    //as the opacity of current_fs reduces to 0 - stored in "now"
+                    //1. scale previous_fs from 80% to 100%
+                    scale = 0.8 + (1 - now) * 0.2;
+                    //2. take current_fs to the right(50%) - from 0%
+                    left = (1 - now) * 50 + "%";
+                    //3. increase opacity of previous_fs to 1 as it moves in
+                    opacity = 1 - now;
+                    current_fs.css({ 'left': left });
+                    previous_fs.css({ 'transform': 'scale(' + scale + ')', 'opacity': opacity });
+                },
+                duration: 100,
+                complete: function () {
+                    current_fs.hide();
+                    animating = false;
+                },
+                //this comes from the custom easing plugin
+                easing: 'easeInOutBack'
+            });
+
+        });
+
+        $(".submit").click(function () {
+            return false;
+        });
+
+    </script>
+    <script>
+        $('.btn').on('click', function () {
+            var $this = $(this);
+            $this.button('loading');
+            setTimeout(function () {
+                $this.button('reset');
+            }, 8000);
+        });
+    </script>
+    <script>
+        $('img').on("error", function () {
+            $(this).attr('src', '/themes/main/assets/img/no-photo.jpg');
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+

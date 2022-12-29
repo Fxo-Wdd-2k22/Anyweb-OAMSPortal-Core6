@@ -1,0 +1,130 @@
+﻿@model DocumentViewModel
+@{
+    var passport = Model.Documents.FirstOrDefault(x => x.DocType == "passport");
+    var idcardfront = Model.Documents.FirstOrDefault(x => x.DocType == "idcardfront");
+    var idcardback = Model.Documents.FirstOrDefault(x => x.DocType == "idcardback");
+    var formb = Model.Documents.FirstOrDefault(x => x.DocType == "formB");
+    var Marksheet9th = Model.Documents.FirstOrDefault(x => x.DocType == "Marksheet9th");
+    var Marksheet10th = Model.Documents.FirstOrDefault(x => x.DocType == "Marksheet10th");
+}
+<form id="document" method="post" asp-action="UploadDocumentInfo" asp-controller="Application" enctype="multipart/form-data">
+    <div class="row">
+
+        <div class="col-md-4 mb-3">
+            <label class="control-label">Passport Size Image <sup class="text-danger">*</sup></label>
+            @if (passport != null)
+            {
+                <img src="data:image/png;base64,@(passport.FilePath)" class="h-50 img-rounded img-thumbnail" style="height:200px !important;" />
+            }
+            else
+            {
+                <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+
+            <div class="custom-file mt-3">
+                <input type="file" asp-for="FilePath" id="passportId" class="form-control custom-file-input" onchange="uploadFile('passportId', @Model.ApplicationId, 'passport')" required/>
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="control-label">Father / Guardian Id Card Front <sup class="text-danger">*</sup></label>
+            @if (idcardfront != null)
+            {
+                <img src="data:image/png;base64,@(idcardfront.FilePath)" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+            else
+            {
+                <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+            <div class="custom-file mt-3">
+                <input type="file" asp-for="FilePath" id="frontId" class="form-control custom-file-input" onchange="uploadFile('frontId', @Model.ApplicationId, 'idcardfront')" required/>
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="control-label">Father / Guardian Id Card Back <sup class="text-danger">*</sup></label>
+            @if (idcardback != null)
+            {
+                <img src="data:image/png;base64,@(idcardback.FilePath)" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+            else
+            {
+                <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+
+            <div class="custom-file mt-3">
+                <input type="file" asp-for="FilePath" id="backId" class="form-control custom-file-input" onchange="uploadFile('backId', @Model.ApplicationId, 'idcardback')" required />
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <label class="control-label">Candidate Form B </label>
+            @if (formb != null)
+            {
+                <img src="data:image/png;base64,@(formb.FilePath)" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+            else
+            {
+                <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+            }
+
+            <div class="custom-file mt-3">
+                <input type="file" asp-for="FilePath" id="formBId" class="form-control custom-file-input" onchange="uploadFile('formBId', @Model.ApplicationId, 'formB')" required />
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+        </div>
+        @if (Model.ClassName != "6th" && Model.ClassName == "7th" && Model.ClassName == "8th" && Model.ClassName == "9th")
+        {
+            <div class="col-md-4 mb-3">
+                <label class="control-label">9th Board Marksheet <span class="text-danger">*</span></label>
+                @if (Marksheet9th != null)
+                {
+                    <img src="data:image/png;base64,@(Marksheet9th.FilePath)" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+                }
+                else
+                {
+                    <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+                }
+
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="FilePath" id="MarksheetId" class="form-control custom-file-input" onchange="uploadFile('MarksheetId', @Model.ApplicationId, 'Marksheet9th')" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label class="control-label">10th Marksheet OR Hope Certificate</label>
+                @if (Marksheet10th != null)
+                {
+                    <img src="data:image/png;base64,@(Marksheet10th.FilePath)" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+                }
+                else
+                {
+                    <img src="~/Themes/Main/assets/img/no-photo.jpg" class="h-50 img-rounded img-thumbnail" style="height: 200px !important;" />
+                }
+
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="FilePath" id="CertificateId" class="form-control custom-file-input" onchange="uploadFile('CertificateId', @Model.ApplicationId, 'Marksheet10th')" />
+                    <label class="custom-file-label">Choose File...</label>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="text-left mt-5" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        @if (passport != null && idcardfront != null && idcardback != null && Marksheet9th != null)
+        {
+            <a href="/Application/ViewProofRead?ApplicationId=@Model.ApplicationId" class="btn btn-brand border-radius wow zoomIn action-button" onclick="NextProofRead()">Next <i class="fa fa-arrow-right"></i></a>
+
+        }
+        else
+        {
+            <a href="#" disabled=""  class="btn btn-brand border-radius wow zoomIn action-button">Next <i class="fa fa-arrow-right"></i></a>
+
+        }
+        @*<button type="button" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button" onclick="NextSubmit()">Next <i class="fa fa-arrow-right"></i></button>*@
+    </div>
+</form>

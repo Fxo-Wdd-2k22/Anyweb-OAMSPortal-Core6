@@ -1,0 +1,219 @@
+﻿@model EducationViewModel
+
+<form id="education" method="post" asp-action="EducationInfo" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnEducationInfoSuccess">
+    <input type="hidden" asp-for="ApplicationId" />
+    <input type="hidden" asp-for="NineEducationId" />
+    <input type="hidden" asp-for="TenEducationId" />
+    <div class="row">
+        <div class="col-md-4" style="display:none">
+            <label class="control-label">Course</label>
+            <select asp-for="CourseId" asp-items="Model.Courses.Select(x => new SelectListItem { Text = x.Title, Value = x.CourseId.ToString() })" class="nice-select">
+                <option value="">Select Course</option>
+            </select>
+            <span class="badge badge-danger" asp-validation-for="CourseId"></span>
+        </div>
+        @if (Model.ClassName != "6th" || Model.ClassName == "7th" || Model.ClassName == "8th" || Model.ClassName == "9th")
+        {
+            <div class="col-md-4">
+                <label class="control-label">Name of School <span class="text-danger">*</span></label>
+                <input asp-for="Institute" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="Institute"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Studying In Class</label>
+                <select asp-for="ClassId" asp-items="Model.AcademicClass.Select(x => new SelectListItem { Text = x.ClassName, Value = x.ClassId.ToString() })" onChange="changetextbox()" class="nice-select" id="ClassId">
+                    @if(Model.ClassName != null)
+                    {
+                        <option value="">@Model.ClassName</option>
+                    }
+                    else
+                    {
+                        <option value="">Select Class</option>
+                    }
+                </select>
+                <span class="badge badge-danger" asp-validation-for="CourseId"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Marks Obtained <span class="text-danger">*</span></label>
+                <input asp-for="ObtMarksNineClass" id="ObtainMarks" class="form-control" required readonly="readonly" />
+                <span class="badge badge-danger" asp-validation-for="ObtMarksNineClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Total Marks <span class="text-danger">*</span></label>
+                <input asp-for="TotalMarksNineClass" class="form-control" required  />
+                <span class="badge badge-danger" asp-validation-for="TotalMarksNineClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Position <span class="text-danger">*</span></label>
+                <input asp-for="Title" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="Title"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Division <span class="text-danger">*</span></label>
+                <input asp-for="DivisionNineClass" id="Grade" class="form-control" required readonly="readonly" />
+                <span class="badge badge-danger" asp-validation-for="DivisionNineClass"></span>
+            </div>
+           
+        }
+        else
+        {
+
+            <div class="col-md-4">
+                <label class="control-label">Name of Board (9TH) <span class="text-danger">*</span></label>
+                <input asp-for="BoardNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="BoardNineClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Roll Number <span class="text-danger">*</span></label>
+                <input asp-for="RollNoNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="RollNoNineClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Year <span class="text-danger">*</span></label>
+                <input asp-for="YearNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="YearNineClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Marks Obtained <span class="text-danger">*</span></label>
+                <input asp-for="ObtMarksNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="ObtMarksNineClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Total Marks <span class="text-danger">*</span></label>
+                <input asp-for="TotalMarksNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="TotalMarksNineClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Percentage <span class="text-danger">*</span></label>
+                <input asp-for="PercentageNineClass" class="form-control" required type="number" />
+                <span class="badge badge-danger" asp-validation-for="PercentageNineClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Division <span class="text-danger">*</span></label>
+                <input asp-for="DivisionNineClass" class="form-control" required />
+                <span class="badge badge-danger" asp-validation-for="DivisionNineClass"></span>
+            </div>
+
+            <div class=" col-xl-12">
+                <br />
+                <p style="text-align:center; font-weight:700; text-decoration:underline">
+                    If 10th Class result is awaited then leave below fields empty.
+                </p>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Name of Board (10th Class)</label>
+                <input asp-for="BoardTenClass" class="form-control" type="text" />
+                <span class="badge badge-danger" asp-validation-for="BoardTenClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Roll Number </label>
+                <input asp-for="RollNoTenClass" class="form-control" type="text" />
+                <span class="badge badge-danger" asp-validation-for="RollNoTenClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Year</label>
+                <input asp-for="YearTenClass" class="form-control" type="number" />
+                <span class="badge badge-danger" asp-validation-for="YearTenClass"></span>
+            </div>
+            <div class="col-md-4" typeof="hidden">
+                <label class="control-label">Marks Obtained</label>
+                <input asp-for="ObtMarksTenClass" class="form-control" type="number" />
+                <span class="badge badge-danger" asp-validation-for="ObtMarksTenClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Total Marks </label>
+                <input asp-for="TotalMarksTenClass" class="form-control" type="number" />
+                <span class="badge badge-danger" asp-validation-for="TotalMarksTenClass"></span>
+            </div>
+            <div class="col-md-4">
+                <label class="control-label">Percentage</label>
+                <input asp-for="PercentageTenClass" class="form-control" type="number" />
+                <span class="badge badge-danger" asp-validation-for="PercentageTenClass"></span>
+            </div>
+
+            <div class="col-md-4">
+                <label class="control-label">Division </label>
+                <input asp-for="DivisionTenClass" class="form-control" />
+                <span class="badge badge-danger" asp-validation-for="DivisionTenClass"></span>
+            </div>
+        }
+
+
+
+    </div>
+
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="submit" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button">Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#education');
+    </script>
+}
+
+
+    <script type="text/javascript">
+        function changetextbox() {
+            debugger;
+            var x = $('select#ClassId option:selected').text();
+            if (x == '1st') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '2nd') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '3rd') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '4th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            if (x == '5th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '6th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '7th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '8th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '9th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '10th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == '11th') {
+                $("#ObtainMarks").attr("readonly", false);
+                $("#Grade").attr("readonly", false);
+            }
+            else if (x == 'Select Class') {
+                $("#ObtainMarks").attr("readonly", true);
+                $("#Grade").attr("readonly", true);
+            }
+            //document.getElementById("ObtainMarks").ariaReadOnly = false;
+            //$("#ObtainMarks").attr("readonly", false);
+            //$("#Grade").attr("readonly", false);
+        }
+    </script>

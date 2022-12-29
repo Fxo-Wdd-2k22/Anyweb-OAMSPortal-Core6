@@ -1,0 +1,77 @@
+﻿@model EmergencyContactViewModel
+
+<form id="emergency" method="post" asp-action="EmergencyContactInfo" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnEmergencyContactInfoSuccess">
+    <input type="hidden" asp-for="ApplicationId" />
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="control-label">Full Name <span class="text-danger">*</span></label>
+            <input asp-for="FullName" class="form-control" required />
+            <span asp-validation-for="FullName" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Relation With Candidate <span class="text-danger">*</span></label>
+            <input asp-for="Relationship" class="form-control" required />
+            <span asp-validation-for="Relationship" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">CNIC Nadra Id Card Number <span class="text-danger">*</span></label>
+            <input asp-for="NationalID" class="form-control NationalID" required type="text" id="NationalID" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Mobile No <span class="text-danger">*</span></label>
+            <input asp-for="Mobile" class="form-control MobileNo" required type="text" id="MobileNo" />
+            <span asp-validation-for="Mobile" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Second Mobile No</label>
+            <input asp-for="Mobile2" class="form-control Mobile2" type="text" />
+            <span asp-validation-for="Mobile2" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Landline No With Area Code</label>
+            <input asp-for="Phone" class="form-control LandLineNo" type="text" id="LandLineNo" />
+            <span asp-validation-for="Phone" class="badge badge-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-6 form-group">
+            <label class="control-label">Email Address</label>
+            <input asp-for="EmailAddress" class="form-control" type="email" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label class="control-label">Relative Present Address <span class="text-danger">*</span></label>
+            <textarea asp-for="PresentAddress" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="PresentAddress" class="badge badge-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label class="control-label">Relative Permanent Address <span class="text-danger">*</span></label>
+            <textarea asp-for="PermanentAddress" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="PermanentAddress" class="badge badge-danger"></span>
+        </div>
+    </div>
+
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="submit" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button">Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>
+
+<script src="~/js/jquery.mask.min.js"></script>
+<script>
+    $('.NationalID').mask('99999-9999999-9');
+    $('.MobileNo').mask('9999-9999999');
+    $('.Mobile2').mask('9999-9999999');
+    $('.LandLineNo').mask('999-9999999');
+   
+</script>
+
+@section Scripts {
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#emergency');
+    </script>
+}

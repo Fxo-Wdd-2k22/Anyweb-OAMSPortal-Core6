@@ -1,0 +1,90 @@
+﻿@model ApplicationViewModel
+
+@if (Model.Applications.Any())
+{
+
+
+    @foreach (var item in Model.Applications.Select((Record, i) => new { r = Record, Sno = (i + 1) }))
+    {
+        <div class="row row-10">
+
+            <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center ">
+                    <p class="my-auto">
+                        Tracking Id
+                        <span> ap-@item.r.ApplicationId</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center">
+                    <p class="my-auto">
+                        Class
+                        <span> @item.r.AcademicClass?.ClassName</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center">
+                    <p class="my-auto">
+                        Session
+                        <span> @item.r.AcadamicSession?.Title</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center">
+                    <p class="my-auto">
+                        Course
+                        <span> @item.r.Course?.Title</span>
+                    </p>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center">
+                    <p class="my-auto">
+                        Status
+                        @if (item.r.Approved)
+                        {
+                            <span class="bg-green pt-6 pb-6 rounded d-flex text-center justify-content-center">Submited</span>
+                        }
+                        else
+                        {
+                            <span class="bg-red pt-6 pb-6 rounded d-flex text-center justify-content-center"> Not Submited</span>
+                        }
+
+                    </p>
+                </div>
+            </div>
+            @if (item.r.Approved)
+            {
+                <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                    <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center">
+                        <p class="my-auto">
+                            Download
+                            <br />
+                            <a asp-route-Id="@item.r.ApplicationId" asp-action="ProofRead" asp-controller="Application" class="btn btn-success btn-sm rounded text-white"> Download</a>
+
+                        </p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-6 col-lg-3 col-md-6 text-center pt-10">
+                    <div class=" shadow-sm h-100 p-3  rounded d-flex text-center justify-content-center" style=" width: 300px;">
+                        <p class="my-auto">
+                            Click here to Edit your Application
+                            <br />
+                            <a asp-route-ApplicationId="@item.r.ApplicationId" asp-action="EditApplication" asp-controller="Application" class="btn btn-success btn-sm rounded text-white" style=" padding: 5px 32px; display: block; margin-top: 10px;"> Edit</a>
+
+                        </p>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <hr />
+    }
+
+}

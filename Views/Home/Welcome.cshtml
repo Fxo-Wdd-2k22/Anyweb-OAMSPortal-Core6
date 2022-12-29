@@ -1,0 +1,178 @@
+﻿@model Applicant
+@{
+    ViewData["Title"] = "Welcome";
+}
+
+<!--== Start Event Hero Banner Area ==-->
+
+<div class="page-header-wrapper bg-img position-relative">
+    <div class="header-bg-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 text-center m-auto">
+                <div class="page-header-content  text-white">
+                    <h2 class="mt-70 mb-20 pb-20 text-white  font-weight-bold text-uppercase"> Welcome @HttpContextAccessor.HttpContext.Session.GetString("FullName")</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="services-content-wrapper profilepage  pb-10 pb-md-10 pb-sm-10 drive-with-us ">
+    <div class="container">
+
+        <div class="row no-gutters">
+
+            <div class="col-12 mx-auto  mt-30 mtm-md-30 mtm-sm-30  mtm-40 ">
+                <div class="h-100   rounded shadow-sm">
+
+
+                    <div class="row no-gutters">
+                        <div class="col-lg-3 col-md-4 p-3 p-xl-5 bg-offwhite ">
+                            <div class="h-100">
+                                <figure class="recent-singer-pic mb-10">
+                                    @if (Model.ProfilePhoto == null)
+                                    {
+                                        <img src="/Themes/Main/assets/img/no-photo.jpg" alt="Singer" class="linkFeaturedImage1">
+                                    }
+                                    else
+                                    {
+                                        <img src="data:image/png;base64,@(Model.ProfilePhoto)" alt="Singer" class="linkFeaturedImage1">
+                                    }
+                                </figure>
+                                <p class="text-center">@Model.ApplicantName</p>
+                                <p class="text-center">
+
+                                    <a href="#" class="shadow-sm rounded text-center w-100 mb-20" data-toggle="modal" data-target="#exampleModal" style="color: #fff; background: #3186fb; width:100px; height: 36px; float: left; font-size: 11px; text-align: center; line-height: 36px; "><i class="fa fa-upload"></i>Upload Photo</a>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-primary">
+                                                    <h5 class="modal-title text-white" id="exampleModalLabel">Upload Photo</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+
+                                                <form id="basic" method="post" asp-action="ChangeProfileImage" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnBasicInfoSuccess" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <label>Upload Image</label>
+                                                        <div class="custom-file">
+
+                                                            <input type="file" id="passportId" class="form-control custom-file-input" name="file" />
+                                                            <input type="hidden" asp-for="ApplicantId" name="ApplicantId" />
+                                                            <label class="custom-file-label">Choose File...</label>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer border-0">
+                                                        <button type="button" class="btn btn-secondary rounded btn-small" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-brand rounded btn-small" id="load2" data-loading-text="<i class='fa fa-spinner fa-spin'></i> Processing">Save Changes</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </p>
+                               
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 p-0 p-md-3 p-xl-5 applications mtm-md-0 mtm-sm-0 bg-white">
+                            <div class="h-100">
+                                <h5 style="background: #8a98a3;" class="text-uppercase text-white rounded p-3 pt-8 pb-8 mt-md-30 mt-sm-30">Personal Information</h5>
+
+                                <div class="table-responsive table-responsive-md  shadow-sm bg-white mb-40">
+                                    <table class="table table-striped personal">
+                                        <thead>
+
+                                            <tr class="border-0">
+                                                <th>First Name</th>
+                                                <th>@Model.ApplicantName </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Mobile Number</td>
+                                                <td>@Model.ApplicantPhoneNumber</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Email Address</td>
+                                                <td>@Model.CRMContact.Email</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                @*<a href="/Application/AddApplication" class="rounded text-center w-100 btn btn-info mb-10"><i class="fa fa-edit"></i> Click Here to Apply & Add New Application</a>*@
+                                <h5 style="background: #8a98a3;" class="text-uppercase text-white rounded p-3 pt-8 pb-8 mt-md-30 mt-sm-30">My Applications</h5>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="table-responsive" id="List" data-url="@Url.Action("Applications", "Home", new { ApplicantId = Model.ApplicantId })">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="snackbar" class="" role="alert"><i class="far fa-check-circle"></i> <b>Success</b> Record Updated Successfully</div>
+<div id="errorbar" class="" role="alert"><i class="fa fa-times"></i> <b>Error</b> Something went wrong</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+            debugger;
+            $.ajax({
+                type: 'GET',
+                url: $('#List').data('url'),
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    $('#List').html(data);
+                }
+            })
+        });
+        function OnBegin() {
+            $('.btnUpdate').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+        function OnBasicInfoSuccess(res) {
+            debugger;
+            if (res.response == "Success") {
+
+
+                $(".linkFeaturedImage1").attr("src", 'data:image/png;base64,' + res.imgsrc);
+              
+                $('#exampleModal').hide();
+                $('.modal-backdrop').hide();
+                ShowToast();
+
+
+
+            }
+            else {
+                ShowErrorToast();
+
+            }
+        }
+        function ShowToast() {
+            debugger;
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+        function ShowErrorToast() {
+            debugger;
+            var x = document.getElementById("errorbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+    </script>
+}
+

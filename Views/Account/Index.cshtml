@@ -1,0 +1,519 @@
+﻿@model anyweb.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+
+    Random rand = new Random();
+    int num1 = rand.Next(1, 5);
+
+    Random rand2 = new Random();
+    int num2 = rand2.Next(1, 5);
+
+    Random rand3 = new Random();
+    int num3 = rand3.Next(1, 5);
+
+    Random rand4 = new Random();
+    int num4 = rand4.Next(1, 5);
+
+    int sum = num1 + num2;
+    int sum2 = num3 + num4;
+}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Online Application Portal
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Themes/Main/assets/img/favicon.png">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Online Application Portal" />
+
+    <meta name="description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="114x114">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="144x144">
+
+    <link rel="canonical" href="http://onlineapplicationform.mysitedemo.us/" />
+
+    <meta property="og:title" content="Online Application Portal">
+    <meta property="og:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+    <meta property="og:url" content="http://onlineapplicationform.mysitedemo.us/">
+    <meta property="og:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg">
+    <meta property="og:site_name" content="">
+
+    <meta name="twitter:card" content="summary" />
+
+    <meta name="twitter:title" content="Online Application Portal" />
+    <meta name="twitter:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address." />
+    <meta name="twitter:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg" />
+
+    <!--== Google Fonts ==-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,800,900%7CPlayfair+Display:400,400i"
+          rel="stylesheet">
+
+    <link href="~/Themes/Main/assets/css/all.css" rel="stylesheet" />
+    <!--=== All Plugins CSS ===-->
+    <link href="~/Themes/Main/assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="~/Themes/Main/assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="~/Themes/Main/assets/css/style.min.css" rel="stylesheet">
+
+    <!-- Modernizer JS -->
+    <script src="~/Themes/Main/assets/js/modernizr-2.8.3.min.js"></script>
+    <link href="~/Themes/Main/assets/css/header2.css" rel="stylesheet" />
+
+    <link href="~/Themes/Main/assets/css/responsive-tabs.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/css/dropzone.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/js/fileupload/image-uploader.css" rel="stylesheet" />
+    <link href="~/lib/jquery-nice-select/css/nice-select.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .nice-select {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-area-wrapper black-header sticky-header">
+
+        <div class="container">
+            <div class="top-header">
+
+
+
+
+                <div class="position-relative d-flex justify-content-between  align-items-center ">
+                    <div class="header-left-wrapper text-lg-left text-center">
+                        <!-- Start Logo Area Wrap -->
+                        <a href=".." class="logo-wrap d-block d-flex justify-content-center align-items-center">
+                            <img src="/Logo/logo.png" alt="White Logo">
+
+
+                        </a>
+                        <!-- End Logo Area Wrap -->
+                    </div>
+
+
+                    <!-- Start Main Navigation Wrap -->
+                    <div class="d-flex  justify-content-end   mt-10">
+                        <ul class="list-unstyled ml-lg-60 d-none d-lg-block">
+                            <li class="mr-xl-60 mr-lg-60">
+
+                                <i class="fa fa-phone fa-fw mr-2"></i> <span>Call Now</span>0300-5311671
+
+                            </li>
+                            <li class="">
+
+                                <i class="fa fa-envelope fa-fw mr-2"></i><span>Email Us</span> info@ccf.edu.pk
+
+                            </li>
+
+                            <li class="ml-60 d-flex">
+
+
+
+
+                            </li>
+
+
+
+
+
+
+                        </ul>
+
+                        <ul>
+                            @if (HttpContextAccessor.HttpContext.Session.GetString("FullName") != null)
+                            {
+                                <li class="list-inline-item">
+                                    <div class="profilebar">
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle  d-flex justify-content-center align-items-center" href="#" role="button" id="profilelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <div class="profileimg"><img src="/Themes/Main/assets/img/team-member.jpg" class="img-fluid" alt="profile"></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="profilelink">
+                                                <div class="dropdown-item">
+                                                    <div class="profilename">
+                                                        <p>@HttpContextAccessor.HttpContext.Session.GetString("FullName")</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userbox">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li class="media dropdown-item">
+                                                            <a href="/Home/Welcome" class="profile-icon">
+                                                                <div class="profile-icon">
+                                                                    <i class="fas fa-user-circle"></i>
+                                                                </div>
+                                                                <p>
+                                                                    My Profile<span>View Personal Profile Detail</span>
+                                                                </p>
+                                                            </a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-12 text-center pt-16 pb-16">
+                                                        <a href="@Url.Action("Logout","Account")" class="btn btn-event border-0 shadow-sm text-center" style="border-radius:40px; font-size:11px">Sign Out</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <!-- End Main Navigation Wrap -->
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </header>
+
+    <div class="page-header-wrapper  bg-img position-relative">
+        <div class="header-bg-mask"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-11 text-center m-auto">
+                    <div class="page-header-content  text-white">
+                        <h1 class="mb-150 pb-150 text-white  font-weight-bold"> Online Application Portal</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="services-content-wrapper  pb-10 pb-md-10 pb-sm-10 drive-with-us ">
+        <div class="container">
+            <div class="row row-5">
+                <div class="col-md-12 col-lg-5 mx-auto mtm-300 mb-md-30 mb-sm-30  order-lg-1 ">
+                    <div class="h-100 bg-white p-4 rounded shadow-sm" style="border-top: 20px solid #28a745;">
+                        <div class="product-description-review mt-16">
+                            <!-- Product Description Tab Menu -->
+                            <ul class="nav nav-tabs desc-review-tab-menu d-flex align-items-center justify-content-center" id="desc-review-tab" role="tablist">
+                                <li>
+                                    <a class="active" id="desc-tab" data-toggle="tab" href="#basicTab" role="tab">Login</a>
+                                </li>
+                                <li>
+                                    <a id="profile-tab" data-toggle="tab" href="#Register" role="tab">Register</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content border-0 p-0" id="myTabContent">
+                                <div class="tab-pane fade active show" id="basicTab">
+                                    <div class="about-us-content pt-sm-30 pb-sm-30 pt-md-30">
+                                        <div class="contact-form-wrapper bg-white position-relative rounded">
+                                            <div class="h-100" id="loaderbg" style="background:rgba(255, 255, 255, 0.86); display:none; width:100%; position:absolute; z-index:1; top:0; left:0">
+                                                <div id="loader" style="display:none"></div>
+                                            </div>
+                                            <div style="display:none;background:rgba(255, 255, 255, 0.9019607843137255);width:100%;position:absolute;height:100%;left:0;top:0;z-index:1" id="resmsg">
+
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                                    <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                                                    <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+                                                </svg>
+                                                <p class="success">
+                                                    Your message has been successfully sent.
+                                                    We will send you a reply as soon as possible.
+                                                </p>
+                                            </div>
+                                            <form asp-action="Login" asp-controller="Account" method="post" data-ajax="true" data-ajax-begin="OnLoginBegin" data-ajax-success="OnLoginSuccess" id="form">
+                                                <h5 class="text-left mb-0">Login In</h5>
+
+                                                <p class="text-left">Want to login in. Fill out this form!</p>  <hr />
+                                                <div class="form-input-item">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input type="text" placeholder="Email" required asp-for="Email" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="Email"></span>
+                                                </div>
+                                                <div class="form-input-item">
+                                                    <label>Password <span class="text-danger">*</span></label>
+                                                    <input type="password" placeholder="Password" required asp-for="Password" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="Password"></span>
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <div class="form-input-item " style="background: #e8f0fe; padding: 10px; display: inline-block; width: 100%; margin-top: 0 !important; border-radius: 8px; ">
+
+                                                        <img src="~/images/rcv3.png" style="float: right;width: 70px;" />
+
+                                                        <p class="pull-left" style="margin-bottom:0px;"> @num1 + @num2 = ?</p>
+
+
+                                                        <span class="pull-left" style="        font-size: 13px; color: red;display: inline-block;width: 80%;">Please enter the sum of two numbers below</span><br />
+                                                        <input type="number" class="form-control" name="Captch" placeholder="Please enter the result" min="@sum" max="@sum" required="" title="Invalid Captcha! Please enter the sum of two numbers." oninvalid="this.setCustomValidity('Invalid Captcha! Please enter the sum of two numbers.')"
+                                                               oninput="this.setCustomValidity('')" />
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <button type="submit" class="btn btn-success rounded-pill    wow zoomIn w-100 " id="btnLogin" style="border-radius:50px">Login</button>
+
+                                                    <!-- Show Message Notification -->
+                                                    <div class="form-message" asp-validation-summary="All" style=" BACKGROUND: RED; COLOR: WHITE; TEXT-ALIGN: CENTER; FONT-WEIGHT: 700; font-size: 17px;margin-top:10px"></div>
+                                                </div>
+
+                                                <!-- Show Message Notification -->
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="Register">
+                                    <div class="about-us-content pt-sm-30 pb-sm-30 pt-md-30">
+                                        <div class="contact-form-wrapper bg-white position-relative rounded">
+                                            <div class="h-100" id="loaderbg" style="background:rgba(255, 255, 255, 0.86); display:none; width:100%; position:absolute; z-index:1; top:0; left:0">
+                                                <div id="loader" style="display:none"></div>
+                                            </div>
+                                            <div style="display:none;background:rgba(255, 255, 255, 0.9019607843137255);width:100%;position: absolute;height: 100%;left:0;top:0;z-index:1" id="resmsg">
+
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                                                    <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                                                    <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+                                                </svg>
+                                                <p class="success">
+                                                    Your message has been successfully sent.
+                                                    We will send you a reply as soon as possible.
+                                                </p>
+
+
+                                            </div>
+                                            <form asp-action="Register" asp-controller="Account" method="post" class="register" id="form" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnRegisterSuccess">
+                                                <h5 class="text-left mb-0">Sign Up</h5>
+
+                                                <p class="text-left">Want to sign up. Fill out this form!</p>  <hr />
+                                                <div class="single-input-item signup mb-12 text-uppercas" style="min-width:200px ">
+                                                    <div class="form-input-item rounded">
+                                                        <label>Class <span class="text-danger">*</span></label>
+                                                        <select class="nice-select mb-12" asp-for="ClassId"
+                                                                asp-items="Model.Classes.Select(x=> new SelectListItem { Text = x.ClassName, Value = x.ClassId.ToString() })">
+                                                            <option selected>Select Class </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-input-item">
+                                                    <label>Applicant Name <span class="text-danger">*</span></label>
+                                                    <input type="text" placeholder="Student Full Name" asp-for="ApplicantName" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="ApplicantName"></span>
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <label>Email <span class="text-danger">*</span></label>
+                                                    <input type="text" placeholder="Valid Email Address" asp-for="Email" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="Email"></span>
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <label>DOB <span class="text-danger">*</span></label>
+                                                    <input placeholder="Student Date of Birth" asp-for="DOB" class="textbox-n" autocomplete="off" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="date" />
+
+                                                    @*<input type="date" placeholder="Date of Birth" asp-for="DOB" autocomplete="off" min="1990-01-01" max="2030-12-31" />*@
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <label>Mobile <span class="text-danger">*</span></label>
+                                                    <input asp-for="Mobile" placeholder="Valid Mobile Number" autocomplete="off" id="MobileNo">
+                                                    <span class="badge badge-danger" asp-validation-for="Mobile"></span>
+                                                </div>
+                                                <div class="form-input-item">
+                                                    <label>Password <span class="text-danger">*</span></label>
+                                                    <input type="password" asp-for="Password" placeholder="Create Password" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="Password"></span>
+                                                </div>
+                                                <div class="form-input-item">
+                                                    <label>Confirm Password <span class="text-danger">*</span></label>
+                                                    <input type="password" asp-for="ConfirmPassword" placeholder="Confirm Password" autocomplete="off">
+                                                    <span class="badge badge-danger" asp-validation-for="ConfirmPassword"></span>
+                                                </div>
+                                                <div class="form-input-item">
+                                                    <div class="form-input-item " style="background: #e8f0fe; padding: 10px; display: inline-block; width: 100%; margin-top: 0 !important; border-radius: 8px; ">
+
+                                                        <img src="~/images/rcv3.png" style="float: right;width: 70px;" />
+
+                                                        <p class="pull-left" style="margin-bottom:0px;"> @num3 + @num4 = ?</p>
+
+
+                                                        <span class="pull-left" style="        font-size: 13px; color: red;display: inline-block;width: 80%;">Please enter the sum of two numbers below</span><br />
+                                                        <input type="number" class="form-control" name="Captch" placeholder="Please enter the result" min="@sum2" max="@sum2" required="" title="Invalid Captcha! Please enter the sum of two numbers." oninvalid="this.setCustomValidity('Invalid Captcha! Please enter the sum of two numbers.')"
+                                                               oninput="this.setCustomValidity('')" />
+
+                                                    </div>
+                                                </div>
+                                                <div class="checkout-box-wrap mt-30">
+                                                    <div class="single-input-item">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input" id="create_pwd">
+                                                            <label class="custom-control-label " for="create_pwd" style="font-weight:500">
+                                                                Send me updates and relevant news.
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="form-input-item">
+                                                    <button type="submit" class="btn btn-success rounded-pill    wow zoomIn w-100 " id="btnRegister" style="border-radius:50px">Create Account</button>
+                                                    <p class="mt-20 font-13 text-center" style="line-height:20px">
+                                                        By clicking the button above, you are agreeing to our <a href="/term-of-use" style="color:#25baf3">Terms of Use.</a>
+                                                    </p>
+
+                                                    <!-- Show Message Notification -->
+                                                    <div class="form-message" asp-validation-summary="All" style=" BACKGROUND: RED; COLOR: WHITE; TEXT-ALIGN: CENTER; FONT-WEIGHT: 700; font-size: 17px;margin-top:10px"></div>
+                                                </div>
+
+                                                <!-- Show Message Notification -->
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-7 mx-auto  mt-30 mtm-md-0 mtm-sm-0  mtm-300 ">
+                    <div class="h-100 bg-white p-3 p-md-4 rounded shadow-sm" style="border-top: 20px solid #a5acb5">
+                        <div class=" justify">
+                            @if (Model != null)
+                            {
+                                if (Model.Content != null)
+                                {
+                                    <h2>@Model.Content.ContentTitle</h2>
+                                    @Html.Raw(Model.Content.ShortDescription)
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-wrapper">
+        <!-- Start Footer Widget Area -->
+        <div class="footer-widget-wrapper pt-0 ">
+            <div class="container">
+
+
+
+                <div class="col-sm-12 text-center rounded pt-0 pb-10" style=" color:#FFF">
+
+                    ©Copyrights  2021 Cloud Campus - All Rights Reserved.<br> <a href="http://anywebplatform.com/" target="_blank" style="text-transform:none; color:#FFF">
+                        Powered by
+                        <img src="/Themes/Main/assets/img/powerdby.png">
+                    </a>
+
+                    <!-- End Single Widget Wrap -->
+                </div>
+            </div>
+        </div>
+
+        <!-- End Footer Widget Area -->
+        <!-- Start Footer Bottom Area -->
+        <!-- End Footer Bottom Area -->
+    </footer>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/javascript">
+
+
+
+        function OnBegin() {
+            $('#btnRegister').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+
+        function OnRegisterSuccess(res) {
+
+            if (res.response == 'Success') {
+
+                window.location.href = '/Home/Welcome';
+            }
+            else {
+
+                $('.form-message').html(res.message);
+                $('#btnRegister').html(`Create Account`);
+            }
+        }
+
+        function OnLoginBegin() {
+            $('#btnLogin').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+
+        function OnLoginSuccess(res) {
+            if (res.response == 'Success') {
+                window.location.href = '/Home/Welcome';
+            }
+            else {
+                $('.form-message').html(res.message);
+                $('#btnLogin').html(`Login`);
+            }
+        }
+    </script>
+    <!--=== All Vendor Js ===-->
+    <script src="~/Themes/Main/assets/js/vendor.js"></script>
+
+    <!--=== All Plugins Js ===-->
+    <script src="~/Themes/Main/assets/js/plugins.js"></script>
+
+    <!--=== Active Js ===-->
+    <script src="~/Themes/Main/assets/js/active.min.js"></script>
+
+    <script src="~/Themes/Main/assets/js/smoothscroll.js"></script>
+
+    <script src="~/Themes/Main/assets/js/fileupload/image-uploader.js"></script>
+
+    <script src="~/Themes/Main/assets/js/responsive-tabs.js"></script>
+    <script src="~/lib/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+
+    <script src="~/Themes/Main/assets/js/jquery.easing.min.js"></script>
+
+
+
+    <script>
+        $('img').on("error", function () {
+            $(this).attr('src', '/themes/main/assets/img/no-photo.jpg');
+        });
+    </script>
+
+    <script src="~/js/jquery.mask.min.js"></script>
+    <script>
+        $('#MobileNo').mask('9999-9999999');
+
+    </script>
+</body>
+</html>

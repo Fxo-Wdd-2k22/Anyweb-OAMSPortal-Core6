@@ -1,0 +1,34 @@
+﻿@model TestCenterViewModel
+
+<form id="testcenter" method="post" asp-action="TestCenterInfo" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnTestCenterInfoSuccess">
+    <input type="hidden" asp-for="ApplicationId" />
+
+    <div class="row">
+        <div class="col-md-12">
+            <label class="control-label">Select Test Center <span class="text-danger">*</span></label>
+            <select asp-for="TestCenterId"  class="form-control" required>
+               <option value="">Select Test Center</option>
+                @foreach(var item in Model.TestCenters)
+            {
+                <option value="@item.TestCenterId">@item.Title</option>
+            }
+            </select>
+            <span class="badge badge-danger" asp-validation-for="TestCenterId"></span>
+        </div>
+        
+    </div>
+    
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="submit" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button">Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#testcenter');
+
+        $('.nice-select').niceSelect({
+            width: '100'
+        });
+    </script>
+}

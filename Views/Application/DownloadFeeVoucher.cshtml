@@ -1,0 +1,563 @@
+﻿@model ApplicationViewModel
+@{
+    ViewData["Title"] = "EditApplication";
+    int count = 0;
+}
+<style>
+    .black-header {
+        display: none !important;
+    }
+    .footer-widget-wrapper {
+       
+        display: none !important;
+    }
+    #Student-Copy {
+        border-right: none !important;
+    }
+
+    p h3 {
+        color: black !important;
+    }
+
+    span {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+<input type="hidden" asp-for="ApplicationId" />
+<input type="hidden" asp-for="ApplicantId" />
+
+                
+               
+
+                <div id="msform" class="mt-6" style="margin-top:20px;">
+                    
+
+                    <div class="row" id="printTable">
+                        <div id="printableArea">
+
+                            <table id="main" style="width:100%">
+
+                                <tbody>
+                                    <tr width="100%">
+                                        <td style="border-right: 2px dashed;padding: 7px;" id="Bank-Copy">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td width="10%" style="text-align:right">
+                                                            <img src="/images/ccf-logo.png" style="height:50px;" />
+                                                        </td>
+                                                        <td width="75%" style="text-align:center">
+                                                            <h3 style="font-size: 12px; font-weight: 700;"> CADET COLLEGE FATEH JANG</h3>
+
+                                                        </td>
+                                                        <td width="15%" style="text-align:left">
+
+                                                            <img src="/images/MCB Bank.png" style="height:50px;" />
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-align:center">
+                                                            <p style="font-size: 11px;font-weight: 600;margin-top: -10px; text-align:center">
+                                                                Bank Challan Slip for Entry Test
+                                                            </p>
+                                                            <p style="font-size: 11px;font-weight: 600; text-align:center">
+                                                                Amount may be deposited at any branch of MCB-Country wide
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @*<table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%"><p style="font-size: 11px;">Slip No </p> </td>
+                                                        <td width="75%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;">ccf-54316-6819</p></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>*@
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="33%" style="text-align:left"><p style="font-size: 11px;">Cash / Cheque No.</p> </td>
+                                                        <td width="17%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;"></p></td>
+                                                        <td width="15%" style="text-align:right">  <p style="font-size: 11px;">Date:</p> </td>
+                                                        <td width="35%" style="text-align:center; border-bottom:1px solid">  <p style="font-size: 11px;">  @DateTime.Now.ToString("dd/MM/yyyy")</p> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%" style="text-align:left"><p style="font-size: 11px;">Branch Name:</p> </td>
+                                                        <td width="25%" style="text-align:left; border-bottom: 1px solid"></td>
+                                                        <td width="25%" style="text-align:right;"><p style="font-size: 11px;">Branch Code: </p> </td>
+                                                        <td width="25%" style="text-align:left;border-bottom: 1px solid"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Name of Applicant  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px">@Model.Applicants.Where(P => P.ApplicantId == Model.ApplicantId).Select(P => P.ApplicantName).FirstOrDefault()</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Father Name  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.FatherName</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">Tel/Cell #  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.MobileNumber</span> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="20%"> <p style="font-size: 11px;">Credit to:</p></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:80%">
+                                                            <span>PRINCIPAL CADET COLLEGE FATEH JANG</span>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:18%"></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:82%">
+                                                            Account No: 0141 7003 0100 9205
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p style="font-size:14px; font-weight:600; text-decoration:underline">
+                                                Fee Detail:
+                                            </p>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr style="text-align:center">
+                                                        <td>Prospectus Fee</td>
+                                                        <td style="border:1px solid; width: 40%; height: 30px;">
+                                                            <span>2,000/-</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Bank Charges</td>
+                                                        <td style="border:1px solid; width: 170px; height: 30px;">100/-</td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Total Amount</td>
+                                                        <td style="border:1px solid;width: 170px; height: 30px;">2,100/-</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%" style="text-align:left"> <p style="font-size: 13px;">Amount in words</p></td>
+                                                        <td width="50%" style="border-bottom: 1px solid"><span style="font-weight:700; font-size:15px">Two Thousand </span> </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="100%" style="border-bottom: 1px solid; text-align: center"><span style="font-weight:700; font-size:15px">One Hundred Only.</span></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+
+
+
+
+
+                                            <table style="width:100%; padding-top:30px">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span style="text-align:left !important; text-decoration: underline;">Depositor's Signature</span> </td>
+                                                        <td><span style="text-align:right !important; text-decoration: underline;">Bank's Officer</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                            <p style="text-align:center; font-weight:800">
+                                                * Bank Copy *
+                                            </p>
+
+                                            <p style="color:gainsboro; font-size:9px">
+                                                CADET COLLEGE FATEH JANG SINCE 2001
+
+                                                PAYABLE AT ANY MUSLIM COMMERCIAL BANK
+                                            </p>
+                                        </td>
+                                        <td style="border-right: 2px dashed;padding: 7px;" id="College-Copy">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td width="10%" style="text-align:right">
+                                                            <img src="/images/ccf-logo.png" style="height:50px;" />
+                                                        </td>
+                                                        <td width="75%" style="text-align:center">
+                                                            <h3 style="font-size: 12px; font-weight: 700;"> CADET COLLEGE FATEH JANG</h3>
+
+                                                        </td>
+                                                        <td width="15%" style="text-align:left">
+
+                                                            <img src="/images/MCB Bank.png" style="height:50px;" />
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-align:center">
+                                                            <p style="font-size: 11px;font-weight: 600;margin-top: -10px; text-align:center">
+                                                                Bank Challan Slip for Entry Test
+                                                            </p>
+                                                            <p style="font-size: 11px;font-weight: 600; text-align:center">
+                                                                Amount may be deposited at any branch of MCB-Country wide
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @*<table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%"><p style="font-size: 11px;">Slip No </p> </td>
+                                                        <td width="75%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;">ccf-54316-6819</p></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>*@
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="33%" style="text-align:left"><p style="font-size: 11px;">Cash / Cheque No.</p> </td>
+                                                        <td width="17%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;"></p></td>
+                                                        <td width="15%" style="text-align:right">  <p style="font-size: 11px;">Date:</p> </td>
+                                                        <td width="35%" style="text-align:center; border-bottom:1px solid">  <p style="font-size: 11px;">  25/10/2021</p> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%" style="text-align:left"><p style="font-size: 11px;">Branch Name:</p> </td>
+                                                        <td width="25%" style="text-align:left; border-bottom: 1px solid"></td>
+                                                        <td width="25%" style="text-align:right;"><p style="font-size: 11px;">Branch Code: </p> </td>
+                                                        <td width="25%" style="text-align:left;border-bottom: 1px solid"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Name of Applicant  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px">@Model.Applicants.Where(P => P.ApplicantId == Model.ApplicantId).Select(P => P.ApplicantName).FirstOrDefault()</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Father Name  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.FatherName</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">Tel/Cell #  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.MobileNumber</span> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="20%"> <p style="font-size: 11px;">Credit to:</p></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:80%">
+                                                            <span>PRINCIPAL CADET COLLEGE FATEH JANG</span>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:18%"></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:82%">
+                                                            Account No: 0141 7003 0100 9205
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p style="font-size:14px; font-weight:600; text-decoration:underline">
+                                                Fee Detail:
+                                            </p>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr style="text-align:center">
+                                                        <td>Prospectus Fee</td>
+                                                        <td style="border:1px solid; width: 40%; height: 30px;">
+                                                            <span>2,000/-</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Bank Charges</td>
+                                                        <td style="border:1px solid; width: 170px; height: 30px;">100/-</td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Total Amount</td>
+                                                        <td style="border:1px solid;width: 170px; height: 30px;">2,100/-</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%" style="text-align:left"> <p style="font-size: 13px;">Amount in words</p></td>
+                                                        <td width="50%" style="border-bottom: 1px solid"><span style="font-weight:700; font-size:15px">Two Thousand </span> </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="100%" style="border-bottom: 1px solid; text-align: center"><span style="font-weight:700; font-size:15px">One Hundred Only.</span></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+
+
+
+                                            <table style="width:100%; padding-top:30px">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span style="text-align:left !important; text-decoration: underline;">Depositor's Signature</span> </td>
+                                                        <td><span style="text-align:right !important; text-decoration: underline;">Bank's Officer</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                            <p style="text-align:center; font-weight:800">
+                                                * College Copy *
+                                            </p>
+
+                                            <p style="color:gainsboro; font-size:9px">
+                                                CADET COLLEGE FATEH JANG SINCE 2001
+
+                                                PAYABLE AT ANY MUSLIM COMMERCIAL BANK
+                                            </p>
+                                        </td>
+                                        <td style="border-right: 2px dashed;padding: 7px;" id="Student-Copy">
+                                            <table width="100%">
+                                                <tbody>
+                                                    <tr>
+
+                                                        <td width="10%" style="text-align:right">
+                                                            <img src="/images/ccf-logo.png" style="height:50px;" />
+                                                        </td>
+                                                        <td width="75%" style="text-align:center">
+                                                            <h3 style="font-size: 12px; font-weight: 700;"> CADET COLLEGE FATEH JANG</h3>
+
+                                                        </td>
+                                                        <td width="15%" style="text-align:left">
+
+                                                            <img src="/images/MCB Bank.png" style="height:50px;" />
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="text-align:center">
+                                                            <p style="font-size: 11px;font-weight: 600;margin-top: -10px; text-align:center">
+                                                                Bank Challan Slip for Entry Test
+                                                            </p>
+                                                            <p style="font-size: 11px;font-weight: 600; text-align:center">
+                                                                Amount may be deposited at any branch of MCB-Country wide
+                                                            </p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            @*<table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%"><p style="font-size: 11px;">Slip No </p> </td>
+                                                        <td width="75%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;">ccf-54316-6819</p></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>*@
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="33%" style="text-align:left"><p style="font-size: 11px;">Cash / Cheque No.</p> </td>
+                                                        <td width="17%" style="text-align:left; border-bottom:1px solid"><p style="font-size: 11px;"></p></td>
+                                                        <td width="15%" style="text-align:right">  <p style="font-size: 11px;">Date:</p> </td>
+                                                        <td width="35%" style="text-align:center; border-bottom:1px solid">  <p style="font-size: 11px;">  25/10/2021</p> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="25%" style="text-align:left"><p style="font-size: 11px;">Branch Name:</p> </td>
+                                                        <td width="25%" style="text-align:left; border-bottom: 1px solid"></td>
+                                                        <td width="25%" style="text-align:right;"><p style="font-size: 11px;">Branch Code: </p> </td>
+                                                        <td width="25%" style="text-align:left;border-bottom: 1px solid"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%" cellpadding="5">
+
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Name of Applicant  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px">@Model.Applicants.Where(P => P.ApplicantId == Model.ApplicantId).Select(P => P.ApplicantName).FirstOrDefault()</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">  Father Name  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.FatherName</span> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="45%" style="text-align:left">Tel/Cell #  </td>
+                                                        <td width="55%" style="text-align:left;border-bottom: 1px solid"> <span style="font-weight:700; font-size:15px"> @Model.MobileNumber</span> </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <table style="width:100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="20%"> <p style="font-size: 11px;">Credit to:</p></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:80%">
+                                                            <span>PRINCIPAL CADET COLLEGE FATEH JANG</span>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:18%"></td>
+                                                        <td style="font-weight: 600; font-size: 15px; width:82%">
+                                                            Account No: 0141 7003 0100 9205
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p style="font-size:14px; font-weight:600; text-decoration:underline">
+                                                Fee Detail:
+                                            </p>
+                                            <table style="width:100%">
+                                                <tbody>
+                                                    <tr style="text-align:center">
+                                                        <td>Prospectus Fee</td>
+                                                        <td style="border:1px solid; width: 40%; height: 30px;">
+                                                            <span>2,000/-</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Bank Charges</td>
+                                                        <td style="border:1px solid; width: 170px; height: 30px;">100/-</td>
+                                                    </tr>
+                                                    <tr style="text-align:center">
+                                                        <td>Total Amount</td>
+                                                        <td style="border:1px solid;width: 170px; height: 30px;">2,100/-</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="50%" style="text-align:left"> <p style="font-size: 13px;">Amount in words</p></td>
+                                                        <td width="50%" style="border-bottom: 1px solid"><span style="font-weight:700; font-size:15px">Two Thousand </span> </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <table width="100%" cellpadding="5">
+                                                <tbody>
+                                                    <tr>
+                                                        <td width="100%" style="border-bottom: 1px solid; text-align: center"><span style="font-weight:700; font-size:15px">One Hundred Only.</span></td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+
+
+
+                                            <table style="width:100%; padding-top:30px">
+                                                <tbody>
+                                                    <tr>
+                                                        <td><span style="text-align:left !important; text-decoration: underline;">Depositor's Signature</span> </td>
+                                                        <td><span style="text-align:right !important; text-decoration: underline;">Bank's Officer</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                            <p style="text-align:center; font-weight:800">
+                                                * Student Copy *
+                                            </p>
+
+                                            <p style="color:gainsboro; font-size:9px">
+                                                CADET COLLEGE FATEH JANG SINCE 2001
+
+                                                PAYABLE AT ANY MUSLIM COMMERCIAL BANK
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+           

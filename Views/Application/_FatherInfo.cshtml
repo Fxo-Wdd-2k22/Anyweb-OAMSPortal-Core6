@@ -1,0 +1,98 @@
+﻿@model FatherViewModel
+
+<form id="father" method="post" asp-action="FatherInfo" asp-controller="Application" data-ajax="true" data-ajax-begin="OnBegin" data-ajax-success="OnFatherInfoSuccess">
+    <input type="hidden" asp-for="ApplicationId" />
+
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="control-label">Relation With Applicant <span class="text-danger">*</span></label>
+            <input asp-for="Relation" class="form-control" required />
+            <span asp-validation-for="Relation" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Full Name <span class="text-danger">*</span></label>
+            <input asp-for="FullName" class="form-control" required />
+            <span asp-validation-for="FullName" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <label class="control-label">CNIC Nadra Id Card Number <span class="text-danger">*</span></label>
+            <input asp-for="NationalID" class="form-control NationalID" required type="text" id="NationalID" />
+
+
+            <span asp-validation-for="NationalID" class="badge badge-danger"></span>
+        </div>
+
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label class="control-label">Present Postal / Mail Address <span class="text-danger">*</span></label>
+            <textarea asp-for="PresentAddress" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="PresentAddress" class="badge badge-danger"></span>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <label class="control-label">Permanent Address (As per CNIC) <span class="text-danger">*</span></label>
+            <textarea asp-for="PermanentAddress" class="form-control" rows="3" required></textarea>
+            <span asp-validation-for="PermanentAddress" class="badge badge-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6 form-group">
+            <label class="control-label">Occupation <span class="text-danger">*</span></label>
+            <input asp-for="Occupation" class="form-control" required />
+            <span asp-validation-for="Occupation" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Monthly Income <span class="text-danger">*</span></label>
+            <input asp-for="MonthlyIncome" class="form-control" required />
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Valid Email Id <span class="text-danger">*</span></label>
+            <input asp-for="EmailAddress" class="form-control" required type="email" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Landline Number With Area Code</label>
+            <input class="form-control" asp-for="PhoneNo" type="text" id="LandLine" />
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Mobile Number <span class="text-danger">*</span></label>
+            <input asp-for="Mobile" class="form-control MobileNumber" required type="text" id="MobileNumber" />
+            <span asp-validation-for="Mobile" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Second Mobile No</label>
+            <input asp-for="Mobile2" class="form-control" type="text" id="MobileNumber2" />
+            <span asp-validation-for="Mobile2" class="badge badge-danger"></span>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="control-label">Office # With Area Code</label>
+            <input class="form-control" asp-for="OfficeNo" type="text" id="OfficeNo" />
+            <span asp-validation-for="Mobile" class="badge badge-danger"></span>
+        </div>
+    </div>
+
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="submit" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button"> Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>
+<script src="~/js/jquery.mask.min.js"></script>
+<script>
+    $('.NationalID').mask('99999-9999999-9');
+    $('.MobileNumber').mask('9999-9999999');
+    $('#MobileNumber2').mask('9999-9999999');
+    $('#LandLine').mask('999-9999999');
+    $('#OfficeNo').mask('999-9999999');
+
+</script>
+@section Scripts {
+
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#father');
+
+
+
+    </script>
+}

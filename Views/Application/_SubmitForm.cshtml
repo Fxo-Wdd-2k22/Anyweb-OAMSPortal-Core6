@@ -1,0 +1,41 @@
+﻿@model ApplicationViewModel
+
+
+<form>
+    <input type="hidden" asp-for="ApplicationId" />
+
+    @if (Model.Approved == true)
+    {
+        <div class="row">
+            <div class="col-md-12 form-group text-center">
+                @*<img src="/images/checkmark-png-25977.png" />*@
+                <img src="/images/checkmark-png-25978.png" style="width: 150px;padding-bottom:30px;" />
+                <h3 style=" font-size: 30px;">Application Submitted Successfully</h3>
+                <p style=" margin-bottom: 0; font-size: 18px;">Thank you for filling out your information.  </p>
+                <p style="font-size: 18px;">We’ve sent you an email at the email address you provided.</p>
+            </div>
+            <div class="col-md-12">
+                <div class="text-left mt-5" style="float:right">
+                    <a href="/Application/ViewProofRead?ApplicationId=@Model.ApplicationId" class="btn btn-brand border-radius wow zoomIn action-button" onclick="NextProofRead()">Next <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12 form-group text-center">
+                @*<img src="/images/checkmark-png-25977.png" />*@
+                <img src="/images/checkmark-png-25978.png" style="width: 150px;padding-bottom:30px;" />
+                <h3 style=" font-size: 30px;">Application not Submitted Successfully</h3>
+                
+            </div>
+            <div class="col-md-12">
+                <div class="text-left mt-5" style="float:right">
+                    <a href="/Application/ViewProofRead?ApplicationId=@Model.ApplicationId" class="btn btn-brand border-radius wow zoomIn action-button" onclick="NextProofRead()">Next <i class="fa fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    }
+
+</form>

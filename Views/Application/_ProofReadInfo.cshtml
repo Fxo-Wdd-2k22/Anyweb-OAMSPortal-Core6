@@ -1,0 +1,22 @@
+﻿@model ApplicationViewModel
+
+
+<form>
+    <input type="hidden" asp-for="ApplicationId" />
+  
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked>
+            <label for="vehicle1" style="display: contents;"> I  <span style="text-decoration:underline" >@Model.Applicants?.FirstOrDefault(x => x.ApplicantId == Model.ApplicantId)?.ApplicantName</span> Father / Guardian of  <span style="text-decoration:underline">@Model.FatherName</span> do hereby solemnly undertake and affirm that I have read and understood the rules and regulations as given in the prospectus / website.</label><br>
+            <br /><br />
+            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" checked>
+            <label for="vehicle2" style="display: contents;"> I do undertake to abide by the rules and regulations and also with the changes incorporated / amended from time to time. I shall abide by the College Rules and accept Principal’s decision in all academic and disciplinary matters concerning my child. I also affirm that all information provided by me in this form is correct and according to the best of my knowledge and belief.</label><br>
+        </div>
+        
+    </div>
+    <div class="text-left mt-5 test" style="float:right">
+        <a href="/Home/Welcome" class="btn btn-brand border-radius wow zoomIn action-button">Back</a>
+        <button type="button" class="btn btn-brand border-radius wow zoomIn btnUpdate action-button" onclick="NextSubmit()"> Next <i class="fa fa-arrow-right"></i></button>
+    </div>
+</form>

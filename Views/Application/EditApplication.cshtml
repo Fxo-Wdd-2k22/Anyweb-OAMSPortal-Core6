@@ -1,0 +1,363 @@
+﻿@model ApplicationViewModel
+@{
+    ViewData["Title"] = "EditApplication";
+    int count = 0;
+    int subcount = 0;
+
+}
+<style>
+    .nice-select[disabled] {
+        background-color: #e9ecef;
+        opacity: 1;
+    }
+</style>
+
+
+<!--== Start Event Hero Banner Area ==-->
+<input type="hidden" asp-for="ApplicationId"  />
+<input type="hidden" asp-for="ApplicantId" />
+<div class="page-header-wrapper  bg-img position-relative">
+    <div class="header-bg-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 text-center m-auto pb-150 mb-sm-20">
+                <div class="page-header-content text-white mt-70">
+                    <ul id="progressbar">
+                        @foreach (var feature in Model.Features.Where(x => x.ParentId == null))
+                        {
+
+                            <li class="@(count == 0 ? "active" : "")" id="@feature.Title" va>@feature.Title</li>
+                            count++;
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="services-content-wrapper  pb-10 pb-md-10 pb-sm-10 drive-with-us">
+    <div class="container">
+        <div class="row">
+            <div class=" col-12 mx-auto mtm-150 mb-md-30 mb-sm-30  order-lg-1 ">
+                <div class="box " style="background: #eef2f4; border-radius: 0px 0px 0 0; min-width: 253px">
+                    <ul class="d-md-flex justify-content-center align-items-center">
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Applicant Name
+                                <span> @Model.Applicants?.FirstOrDefault(x => x.ApplicantId == Model.ApplicantId)?.ApplicantName</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Class
+                                <span> @Model.AcademicClasses?.FirstOrDefault(x => x.ClassId == Model.ClassId)?.ClassName</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Academic Session
+                                <span> @Model.AcadamicSessions?.FirstOrDefault(x => x.AcadSessionId == Model.AcadSessionId)?.Title</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Course
+                                <span> @Model.Courses?.FirstOrDefault(x => x.CourseId == Model.CourseId)?.Title</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Completion Date
+                                <span> @Model.ApprovalDate?.ToString("dd-MM-yyyy")</span>
+                            </p>
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="single-skill-bar mt-0">
+                    <div class="skill-progress progress">
+                        <div class="progress-bar skill-progress-bar" data-skill-amount="10%"></div>
+                    </div>
+                    <div class="skills-info d-flex align-items-center justify-content-between text-white mt-10">
+                        <span class="skill-title">Application Progress</span>
+                        <span class="skill-percent"></span>
+                    </div>
+                </div>
+                
+                <div id="msform" class="mt-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<input type="hidden" asp-for="ApplicationId" />
+<div id="snackbar" class="" role="alert"><i class="far fa-check-circle"></i> <b>Success</b> Record Updated Successfully</div>
+<div id="errorbar" class="" role="alert"><i class="fa fa-times"></i> <b>Error</b> Something went wrong</div>
+@section Scripts {
+    @if (Model.Approved == true)
+    {
+        
+        <script>
+           
+            $(document).ready(function () {
+                $(".progress-bar").attr('style', 'width:100% !important');
+                $(".skill-percent").html("100%");
+            });
+
+
+        </script>
+    }
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#basic');
+        $(function () {
+            debugger;
+            $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId")
+
+
+            //var url = $('[data-toggle="tab"].active').data('url');
+            //alert(url);
+            //GetData(url);
+
+
+
+            $('.custom-file-input').on("change", function () {
+                var fileApplicantName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileApplicantName);
+            });
+        });
+        function GetData(url) {
+            debugger;
+            $.ajax({
+                type: 'GET',
+                url: url,
+                data: { Id: $('#ApplicationId').val() },
+                beforeSend: function () {
+                    $('#tabs-1').html("<div style='text-align:center'><i class='fa fa-spinner fa-spin fa-5x mt-5'></i></div>");
+                },
+                success: function (res) {
+                    $('#tabs-1').html(res);
+                }
+            });
+        }
+        function OnBegin() {
+            $('.btnUpdate').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+        function OnBasicInfoSuccess(res) {
+            if (res.response == "Success") {
+                $(".progress-bar").attr('style', 'width:12.5% !important');
+                $(".skill-percent").html("12.5%");
+                $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                ShowToast();
+                var url = '/Application/FatherInfo';
+               // GetData(url);
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            else {
+                ShowErrorToast();
+               // alert(res.message);
+            }
+        }
+        function OnFatherInfoSuccess(res) {
+            if (res.response == "Success") {
+
+                $(".progress-bar").attr('style', 'width:25% !important');
+                $(".skill-percent").html("25%");
+                $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                ShowToast();
+                var url = '/Application/EmergencyContactInfo';
+                //GetData(url);
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            else {
+                ShowErrorToast();
+               // alert(res.message);
+            }
+        }
+        function OnEmergencyContactInfoSuccess(res) {
+            if (res.response == "Success") {
+                $(".progress-bar").attr('style', 'width:37.5% !important');
+                $(".skill-percent").html("37.5%");
+                $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                ShowToast();
+                var url = '/Application/EducationInfo';
+                //GetData(url);
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            else {
+                ShowErrorToast();
+              //  alert(res.message);
+            }
+        }
+        function OnEducationInfoSuccess(res) {
+            if (res.response == "Success") {
+                $(".progress-bar").attr('style', 'width:50.0% !important');
+                $(".skill-percent").html("50.0%");
+                $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                ShowToast();
+                var url = '/Application/TestCenterInfo';
+                //GetData(url);
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            else {
+                ShowErrorToast();
+               // alert(res.message);
+            }
+        }
+        function OnTestCenterInfoSuccess(res) {
+            if (res.response == "Success") {
+                $(".progress-bar").attr('style', 'width:62.5% !important');
+                $(".skill-percent").html("62.5%");
+                $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                ShowToast();
+                var url = '/Application/DocumentInfo';
+                //GetData(url);
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+            }
+            else {
+                alert(res.message);
+            }
+        }
+        function uploadFile(inputId, appid, doctype) {
+            $(".progress-bar").attr('style', 'width:75% !important');
+            $(".skill-percent").html("75%");
+
+            debugger;
+            var input = document.getElementById(inputId);
+            var files = input.files;
+            var formData = new FormData();
+
+            for (var i = 0; i != files.length; i++) {
+                formData.append("file", files[i]);
+            }
+
+            $.ajax(
+                {
+                    url: `/Application/DocumentInfo?ApplicationId=${appid}&DocType=${doctype}`,
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    type: "POST",
+                    success: function (res) {
+                        if (res.response == "Success") {
+                            $('.btnUpdate').html(`Next <i class="fa fa-arrow-right"></i>`);
+                            ShowToast();
+                            var url = '/Application/DocumentInfo';
+                            GetData(url);
+                            $('[data-toggle="tab"]').each(function () {
+                                $(this).removeClass('active');
+                                if ($(this).data('url').indexOf(url) === 0) {
+                                    $(this).addClass('active');
+                                }
+                            });
+                        }
+                        else {
+                            ShowErrorToast();
+                        }
+                    }
+                }
+            );
+        }
+        function NextProofRead() {
+            $(".progress-bar").attr('style', 'width:87.5% !important');
+            $(".skill-percent").html("87.5%");
+            $.get("Application/ProofReadInfo?Id=@Model.ApplicationId");
+
+
+        }
+        function NextSubmit() {
+            $(".progress-bar").attr('style', 'width:87.5% !important');
+            $(".skill-percent").html("87.5%");
+            $.get("Application/ProofReadInfo?Id=@Model.ApplicationId");
+            var url = '/Application/SubmitForm';
+                $("#msform").load("/Application/AsideBar?ApplicationId=@Model.ApplicationId");
+                $('[data-toggle="tab"]').each(function () {
+                    $(this).removeClass('active');
+                    if ($(this).data('url').indexOf(url) === 0) {
+                        $(this).addClass('active');
+                    }
+                });
+        }
+        function ShowToast() {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+        function ShowErrorToast() {
+            var x = document.getElementById("errorbar");
+            x.className = "show";
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 4000);
+        }
+    </script>
+    <script>
+            function OpenTab(url, subcount) {
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: { Id: $('#ApplicationId').val() },
+                    beforeSend: function () {
+                        $('#tabs-1').html("<div style='text-align:center;'><i class='fa fa-spinner fa-spin fa-5x mt-5'></i></div>");
+                    },
+                    success: function (res) {
+
+                        $('.nav-link').removeClass('active');
+                        $('#count_' + subcount).addClass('active');
+                        $('#tabs-1').html(res);
+                        if ('@Model.Approved' == 'True')
+                        {
+                            $(".custom-file-input").css("display", "none");
+                            $(".test").css("display", "none");
+
+
+                            $('.form-control').attr('readonly', true);
+                            $('select[class="nice-select"]').attr('disabled', 'disabled');
+
+                        }
+                        }
+                });
+            }
+            function OpenPage(ID) {
+                debugger;
+                var Id = $('#ApplicationId').val();
+
+
+                var link = $(".test_" + ID).attr('at');
+                link = link + "?Id=" + Id;
+                window.open(link, '_blank');
+            }
+    </script>
+}

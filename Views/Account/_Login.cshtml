@@ -1,0 +1,52 @@
+﻿@model anyweb.ViewModels.LoginViewModel
+
+<div class="about-us-content pt-sm-30 pb-sm-30 pt-md-30">
+    <div class="contact-form-wrapper bg-white position-relative rounded">
+        <div class="h-100" id="loaderbg" style="background:rgba(255, 255, 255, 0.86); display:none; width:100%; position:absolute; z-index:1; top:0; left:0">
+            <div id="loader" style="display:none"></div>
+        </div>
+        <div style="display:none;background:rgba(255, 255, 255, 0.9019607843137255);width:100%;position:absolute;height:100%;left:0;top:0;z-index:1" id="resmsg">
+
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1" />
+                <polyline class="path check" fill="none" stroke="#73AF55" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
+            </svg>
+            <p class="success">
+                Your message has been successfully sent.
+                We will send you a reply as soon as possible.
+            </p>
+        </div>
+        <form asp-action="Login" asp-controller="Account" method="post" data-ajax="true" data-ajax-begin="OnLoginBegin" data-ajax-success="OnLoginSuccess" id="form">
+            <div class="form-input-item">
+                <input type="text" placeholder="Email" required asp-for="Email" autocomplete="off">
+                <span class="badge badge-danger" asp-validation-for="Email"></span>
+            </div>
+            <div class="form-input-item">
+                <input type="password" placeholder="Password" required asp-for="Password" autocomplete="off">
+                <span class="badge badge-danger" asp-validation-for="Password"></span>
+            </div>
+            <div class="checkout-box-wrap mt-30">
+                <div class="single-input-item">
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="create_pwd">
+                        <label class="custom-control-label " for="create_pwd" style="font-weight:500">
+                            Send me updates and relevant news.
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-input-item">
+                <button type="submit" class="btn btn-brand border-radius wow zoomIn w-100" id="btnLogin" style="border-radius:50px">Login</button>
+                <p class="mt-20 font-13 text-center" style="line-height:20px">
+                    By clicking the button above, you are agreeing to our <a href="#" style="color:#25baf3">Terms of Use.</a>
+                </p>
+                <!-- Show Message Notification -->
+                <div class="form-message" asp-validation-summary="All"></div>
+            </div>
+
+            <!-- Show Message Notification -->
+
+        </form>
+    </div>
+</div>

@@ -1,0 +1,250 @@
+﻿@model PrintApplicationVM
+@{
+    <title>Roll Number Slip</title>
+    Layout = null;
+}
+
+    <body style="font: normal 11px Tahoma, Geneva, sans-serif;" onload="window.print()">
+       
+
+        <div id="printableArea">
+            <style>
+                #Student-Copy {
+                    border-right: none !important;
+                }
+            </style>
+            <style media="print">
+                @@page {
+                    size: A4 portrait
+                }
+            </style>
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <table style="width:100%; text-align:center; font-size:26px; font-weight:900" cellpadding="4">
+                            <tr>
+                                <td>
+                                    <p>Online Student Roll Number Slip</p>
+                                    <p style="margin-top: -24px;">Session @Model.Session</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="width:100%; border:1px solid" cellpadding="4">
+                            <tr>
+                                <td>
+                                    <table style="width:100%; border:3px solid" cellpadding="5">
+                                        <tr>
+                                            <td>
+                                                <table style="width:100%;">
+                                                    <tr>
+                                                        <td width="26%">
+                                                            <img src="/images/ccf-logo.png" width="100px" height="100px" />
+                                                        </td>
+                                                        <td width="70%">
+                                                            <p style="font-size:36px; font-weight:900; margin-left: -50px;">test</p>
+                                                            <p style="font-size:20px;font-weight:800;margin-left: -45px;text-decoration:underline">ROLL N0 SLIP - SESSION @Model.Session</p>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <table style="width:100%" cellpadding="5">
+                                                    <tr>
+                                                        <td width="78%" style="padding: 15px;">
+                                                            <table style="width:100%" cellpadding="5">
+                                                                <tr>
+                                                                    <td width="20%"><p>ROLL NO</p></td>
+                                                                    <td width="30%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p>@Model.ApplicantDetail.RollNo</p></td>
+                                                                    <td width="20%" style="text-align:right"><p>CLASS</p></td>
+                                                                    <td width="30%" style="border-bottom:1px solid; font-weight:700; text-align:center !important"><p>@Model.AcademicClasses.Where(p => p.ClassId == Model.ClassId).Select(p => p.ClassName).FirstOrDefault()</p></td>
+                                                                </tr>
+                                                            </table>
+                                                            <br />
+                                                            <table style="width:100%" cellpadding="5">
+                                                                <tr>
+                                                                    <td width="30%"><p>CANDIDATE NAME</p></td>
+                                                                    <td width="70%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p style="text-transform:capitalize !important">@Model.ApplicantDetail.ApplicantName</p></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%"><br /></td>
+                                                                    <td width="70%"><br /></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%"><p>FATHER'S NAME</p></td>
+                                                                    <td width="70%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p style="text-transform:capitalize !important">@Model.FullName</p></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%"><br /></td>
+                                                                    <td width="70%"><br /></td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td width="30%"><p>CENTRE</p></td>
+                                                                    <td width="70%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p>@Model.TestCenters.Where(p => p.TestCenterId == Model.TestCenterId).Select(P => P.Title).FirstOrDefault()</p></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%"><br /></td>
+                                                                    <td width="70%"><br /></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td width="30%"><p>PHONE</p></td>
+                                                                    <td width="70%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p>@Model.PhoneNo</p></td>
+                                                                </tr>
+                                                            </table>
+                                                            <br />
+                                                            <table style="width:100%" cellpadding="5">
+                                                                <tr>
+                                                                    <td width="15%"><p>DATE</p></td>
+                                                                    <td width="35%" style="border-bottom:1px solid; text-align:left; font-weight:700"><p>@Model.TestDate</p></td>
+                                                                    <td width="13%" style="text-align:right"><p>TIME</p></td>
+                                                                    <td width="37%" style="border-bottom:1px solid; font-weight:700"><p>@Model.TestTiming</p></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td width="20%">
+                                                            <table style="width:100%; " cellpadding="5">
+                                                                <tr>
+                                                                    <td style="text-align:right !important">
+                                                                        @if (Model.ApplicantDetail.ProfilePhoto == null)
+                                                                        {
+                                                                            <img src="~/Themes/Main/assets/img/no-photo.jpg" height="100px" width="100px" />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <img src="/images/Documents/@Model.ApplicantDetail.ProfilePhoto" height="100px" width="100px" />
+                                                                        }
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><br /></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><br /></td>
+                                                                </tr>
+                                                                @*<tr>
+                                                                <td style="text-align:center !important">
+                                                                    {signature}
+                                                                </td>
+                                                            </tr>*@
+                                                                <tr>
+                                                                    <td><br /></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align:center !important">
+                                                                        <p style="padding-bottom:10px">I/C Admission Cell</p>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+
+
+                    </td>
+
+                </tr>
+            </table>
+            <p style="page-break-before: always"></p>
+            <table style="width:100%;">
+                <tr>
+                    <td>
+                        <h2 style="text-align:center; text-decoration:underline">Instruction Regarding Written test </h2>
+                        <p>1. You will not be allowed to appear in the examination without this Roll No. Slip. You have to keep the Roll No, Slip with you during all papers.</p>
+                        <p>2. The cadidate must be report to the propose Examination Centre at least half an hour before the start of the written test.</p>
+                        <p>3. The candidate must report to the propose Examination Centre at least half an hour befor the start of the test. Only blue or black ink is to used for solving the papers.</p>
+                        <p>4. Due to COVID-19 Pandemic mask is mandatory before entering in the college. After passing through sanitizing gate temperature will checked.</p>
+
+                        <p>5. Test will be taken form four subjects, Duration if test wikk be <span style="text-decoration:underline;">2 hours.</span>. After test parents can pick their son/ward from college.</p>
+                        <p>6. To avoid inconvenience to the invigilating staff and the concerned centre (where the test is being conducted) parents/ guardians should leave the area before the start of paper.</p>
+                        <p>8. Candidates must ensure to write their name and roll number. on the question paper as well as on the title cover of the answer book/ extra sheet. You should read the question paper carefully and in case of any ambiguity, clrification may be sought form the Invigilating staff.</p>
+                        <p>9. Candidates are not allowed to bring with them any paper (written/printed or plain) or any book in Examination Hall. A candidate found using unfair means during the examination, will result into the cancellation of all papers.</p>
+                        <p>10. After the completion of the written test candidate must wait for their turn for and intervire by college Staff.</p>
+                        <p>11. Candidate failing to appear for interview will be marked fall in written test. No excuse will therefore be accepted.</p>
+                        
+
+                        </td>
+                    </tr>
+                <tr>
+                    <td>
+                        <p style="width: 100%; border: 1px solid; padding: 5px;"><strong>Note:</strong> Syllabus for test of class 11th can be downloaded form our website and is also mentioned at the end of college propectus.</p>
+                        <h3 style="text-align:right">Controller Exams,</h3>
+                        <h3 style="text-align:right">Cadet College  Fateh Jang</h3>
+                    </td>
+                    
+                </tr>
+            </table>
+
+
+                        <p style="page-break-before: always"></p>
+
+                        <table style="width:100%; direction:rtl !important;">
+                            <tr>
+                                <td>
+                                    <h3 style="text-align:center; text-decoration:underline">ہدایات برائےآن لائن ٹیسٹ </h3>
+                                    <p> 1۔	یہ ٹیسٹ مقرر وقت کے اندر مکمل کرنا ہوگا۔اگر آپ نے مقرر کردہ وقت جو کہ10:00 سے  10:40 تک ہے ۔ٹیسٹ کےتمام سوالوں کو 	attempt کر کے submit بٹن پریس نہ کیا تو آپ کا ٹیسٹ سافٹ ویئر Lock کر دے گا ۔ ٹیسٹ کی حتمی تاریخ اور وقت آپ کو دی گئی رولنمبر 	سلپ میں درج ہے۔  </p>
+
+                                    <p>
+                                        2۔	 ٹیسٹ ٹوٹل چار مضامین میں سے ہوگا اور ہر مضمون کے 10 Mcq’s ہوں گے۔ ہر MCQ کے لیے 2 نمبر مختص کیے گئے ہیں ۔ ٹوٹل مارکس 40	ہوں گے۔
+                                    </p>
+                                    <p>
+                                        3. ٹیسٹ سے پہلے آپ کے پاس ایک حتمی اور درست  gmail ہونی چاہیے ۔ اگر آپ کی google email idنہیں ہے تو اسے فوراً بنائیں۔آپ کے موبائل یا لیپ ٹاپ یا ٹیب کا فرنٹ کیمرہ  بالکل ٹھیک ہونا چاہیے اور انٹرنیٹ کنکشن میں کوئی مسئلہ نہ ہو اسے بھی یقینی بنایا جائے۔
+                                    </p>
+                                    <p>
+                                        4. ٹیسٹ کا لنک آپ کے موبائل پر Whatsapp میں بھیجا جائے گا۔ آپ جیسے ہی اس کو کلک کریں گے تو آپ سے آپ کا نام ، رولنمبر اور ای میل 	پوچھے گا۔ آپ جیسے ہی یہ معلومات کا اندراج کریں گے آپ کا ٹیسٹ شروع ہو جائے گا۔
+                                    </p>
+                                    <p>
+                                        5. گر آپ نے کسی بھی MCQ’s  کے جواب کو Tick نہ کیاتوسافٹ ویئر آپ کواگلے صفحے پر جانے کے لیے  Next بٹن پریس نہیں کرنے دے گا۔ 	اس لیے آپ کو اس صفحے پر موجود سوالات کا جواب دے کر ہی Next کا بٹن کام کرے گا۔ جب تمام ٹیسٹ مکمل ہوجائے گا تووہاں آخری صفحہ پر 	Submit کا بٹن ہو گا۔ بٹن کو دباتے ہی آپ کا ٹیسٹ کالج کو موصول ہو جائے گا۔
+                                    </p>
+                                    <p>
+                                        6. ٹیسٹ سے پہلے آپ کے پاس صفحہ اور پن موجود ہونے چاہئیں تاکہ کوئی بھی سوال حل کرنے یا رَف ورک کرنے میں آسانی ہو۔ وقت کی پابندی کا 	خاص خیال کرتے ہوئے گھڑی اپنے سامنے رکھ کر پیپر حل کریں۔ مقرر ٹائم کے اندر ہی پیپر Submit کرنا ہو گا وگرنہ ٹیسٹ منسوخ تصور ہوگا۔
+                                    </p>
+                                    <p>
+                                        7. ٹیسٹ کےبعد  2 گھنٹے کے دورانیے میں آپ کو کالج کی طرف سے انٹرویو کیWhatsapp پر کال آئے گی اور آپ کا آن لائن انٹرویو ہو گا۔      جس میں آپ سے کورس اور جنرل نالج کے متعلق سوالات ہوں گے۔
+                                    </p>
+
+
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width:100%; border:1px solid">
+                                    <p><strong>نوٹ:</strong>  آپ کی آسانی اور رہنمائی کے لیے کیڈٹ کالج فتح جنگ 15 منٹ کا فرضی امتحان/ پریکٹس ٹیسٹ(Mock test)  کا  فوری انعقاد    کرے گا جس کا وقت اور تاریخ آپ کو جلد ہی Whatsapp اور میسج کے ذریعے مطلع کر دی جائے گی۔پریکٹس ٹیسٹ کا مقصد آپ کو Online ٹیسٹ کے طریقہ کار سے آگاہی دینا مقصود ہے تاکہ آپ فائنل آن لائن ٹیسٹ دیتے وقت پُر اعتماد ہوں۔ </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h3>کنٹرولر امتحانات, </h3>  <h3>کیڈٹ کالج فتح جنگ </h3>
+                                </td>
+                            </tr>
+                        </table>
+
+        </div>
+    </body>
+
+    <script src="~/js/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            printDiv('printableArea');
+        });
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            window.close();
+            document.body.innerHTML = originalContents;
+        }
+    </script>

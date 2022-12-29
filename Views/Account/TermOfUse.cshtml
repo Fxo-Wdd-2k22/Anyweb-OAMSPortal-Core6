@@ -1,0 +1,323 @@
+﻿@model anyweb.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <title>
+        Online Application Portal
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/Themes/Main/assets/img/favicon.png">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Online Application Portal" />
+
+    <meta name="description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="72x72">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="114x114">
+    <link href="~/Logo/Favicon.jpg" rel="apple-touch-icon" sizes="144x144">
+
+    <link rel="canonical" href="http://onlineapplicationform.mysitedemo.us/" />
+
+    <meta property="og:title" content="Online Application Portal">
+    <meta property="og:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address.">
+    <meta property="og:url" content="http://onlineapplicationform.mysitedemo.us/">
+    <meta property="og:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg">
+    <meta property="og:site_name" content="">
+
+    <meta name="twitter:card" content="summary" />
+
+    <meta name="twitter:title" content="Online Application Portal" />
+    <meta name="twitter:description" content="Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th & 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password & provide valid email address." />
+    <meta name="twitter:image" content="http://onlineapplicationform.mysitedemo.us/Themes/Main/assets/img/social-icon.jpg" />
+
+    <!--== Google Fonts ==-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700,800,900%7CPlayfair+Display:400,400i"
+          rel="stylesheet">
+
+    <link href="~/Themes/Main/assets/css/all.css" rel="stylesheet" />
+    <!--=== All Plugins CSS ===-->
+    <link href="~/Themes/Main/assets/css/plugins.css" rel="stylesheet">
+    <!--=== All Vendor CSS ===-->
+    <link href="~/Themes/Main/assets/css/vendor.css" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="~/Themes/Main/assets/css/style.min.css" rel="stylesheet">
+
+    <!-- Modernizer JS -->
+    <script src="~/Themes/Main/assets/js/modernizr-2.8.3.min.js"></script>
+    <link href="~/Themes/Main/assets/css/header2.css" rel="stylesheet" />
+
+    <link href="~/Themes/Main/assets/css/responsive-tabs.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/css/dropzone.css" rel="stylesheet" />
+    <link href="~/Themes/Main/assets/js/fileupload/image-uploader.css" rel="stylesheet" />
+    <link href="~/lib/jquery-nice-select/css/nice-select.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .nice-select {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-area-wrapper black-header sticky-header">
+
+        <div class="container">
+            <div class="top-header">
+
+
+
+
+                <div class="position-relative d-flex justify-content-between  align-items-center ">
+                    <div class="header-left-wrapper text-lg-left text-center">
+                        <!-- Start Logo Area Wrap -->
+                        <a href=".." class="logo-wrap d-block d-flex justify-content-center align-items-center">
+                            <img src="/Logo/logo.png" alt="White Logo">
+
+
+                        </a>
+                        <!-- End Logo Area Wrap -->
+                    </div>
+
+
+                    <!-- Start Main Navigation Wrap -->
+                    <div class="d-flex  justify-content-end   mt-10">
+                        <ul class="list-unstyled ml-lg-60 d-none d-lg-block">
+                            <li class="mr-xl-60 mr-lg-60">
+
+                                <i class="fa fa-phone fa-fw mr-2"></i> <span>Call Now</span>0300-5311671
+
+                            </li>
+                            <li class="">
+
+                                <i class="fa fa-envelope fa-fw mr-2"></i><span>Email Us</span> info@ccf.edu.pk
+
+                            </li>
+
+                            <li class="ml-60 d-flex">
+
+
+
+
+                            </li>
+
+
+
+
+
+
+                        </ul>
+
+                        <ul>
+                            @if (HttpContextAccessor.HttpContext.Session.GetString("FullName") != null)
+                            {
+                                <li class="list-inline-item">
+                                    <div class="profilebar">
+                                        <div class="dropdown">
+                                            <a class="dropdown-toggle  d-flex justify-content-center align-items-center" href="#" role="button" id="profilelink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <div class="profileimg"><img src="/Themes/Main/assets/img/team-member.jpg" class="img-fluid" alt="profile"></div>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right shadow-sm" aria-labelledby="profilelink">
+                                                <div class="dropdown-item">
+                                                    <div class="profilename">
+                                                        <p>@HttpContextAccessor.HttpContext.Session.GetString("FullName")</p>
+                                                    </div>
+                                                </div>
+                                                <div class="userbox">
+                                                    <ul class="list-unstyled mb-0">
+                                                        <li class="media dropdown-item">
+                                                            <a href="/Home/Welcome" class="profile-icon">
+                                                                <div class="profile-icon">
+                                                                    <i class="fas fa-user-circle"></i>
+                                                                </div>
+                                                                <p>
+                                                                    My Profile<span>View Personal Profile Detail</span>
+                                                                </p>
+                                                            </a>
+                                                        </li>
+
+
+                                                    </ul>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-12 text-center pt-16 pb-16">
+                                                        <a href="@Url.Action("Logout","Account")" class="btn btn-event border-0 shadow-sm text-center" style="border-radius:40px; font-size:11px">Sign Out</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                    <!-- End Main Navigation Wrap -->
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+
+
+    </header>
+
+    <div class="page-header-wrapper  bg-img position-relative">
+        <div class="header-bg-mask"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-11 text-center m-auto">
+                    <div class="page-header-content  text-white">
+                        <h1 class="mb-150 pb-150 text-white  font-weight-bold"> Terms of use</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="services-content-wrapper  pb-10 pb-md-10 pb-sm-10 drive-with-us ">
+        <div class="container">
+            <div class="row row-5">
+                
+                <div class="col-md-12 col-lg-12 mx-auto  mt-30 mtm-md-0 mtm-sm-0  mtm-300 ">
+                    <div class="h-100 bg-white p-3 p-md-4 rounded shadow-sm" style="border-top: 20px solid #a5acb5">
+                        <div class=" justify">
+                            <h2>Instructions</h2>
+                            <h5> Kindly Scroll Down for new Registration</h5>
+                            <p>Applicants applying for the First time need to create new account. To start the application for Class 6th, 7th, 8th &amp; 9th admission (Session 2021) in Cadet College Fateh Jang, fill out Details, create your own password &amp; provide valid email address.</p>
+                            <p>After registration, an auto-generated confirmation mail will be sent on your Email ID containing the following:</p>
+                            <ul class="list-style">
+                                <li>Confirmation of Successful Online Registration.</li>
+                                <li>Online Application Log-In Username ID.</li>
+                                <li>Online Application Log-In Password.</li>
+                            </ul>
+                            <p>Kindly save the Username and Password emailed to you for future logins. While applying, you can always save what you have entered and come back later to finish your application by entering Username and password in Log-In area.</p>
+                            <h5> Already Registered?</h5>
+                            <p>If you have already registered yourself, enter your Username &amp; Password and Click on Log In button available on the Right side of your screen. Username &amp; Password is your email id and passwors is same your created yourself at the time of registeration and is already emailed to you. After Logging-In, Complete your application form where you left off previously.</p>
+                            <h5> Documents Upload Requirement</h5>
+                            <ul class="list-style">
+                                <li>Upload Portrait Passpost Size Picture of Applicant. The photograph must be a recent passport size color picture, preferably in white background. Photographs with Caps, hats and dark glasses are not acceptable.</li>
+                                <li>Upload picture of CNIC NADRA ID Card of Parent OR Guardian (Front &amp; Back Side).</li>
+                                <li>Upload picture of Student NADRA Form B</li>
+                                <li>Pay &amp; Upload 1500 PKR non-refundable application Fee Bank Challan / Voucher. ( Fee Voucher can be downloaded in your online profile under section "Fee Payment" )</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-wrapper">
+        <!-- Start Footer Widget Area -->
+        <div class="footer-widget-wrapper pt-0 ">
+            <div class="container">
+
+
+
+                <div class="col-sm-12 text-center rounded pt-0 pb-10" style=" color:#FFF">
+
+                    ©Copyrights  2021 Cloud Campus - All Rights Reserved.<br> <a href="http://anywebplatform.com/" target="_blank" style="text-transform:none; color:#FFF">
+                        Powered by
+                        <img src="/Themes/Main/assets/img/powerdby.png">
+                    </a>
+
+                    <!-- End Single Widget Wrap -->
+                </div>
+            </div>
+        </div>
+
+        <!-- End Footer Widget Area -->
+        <!-- Start Footer Bottom Area -->
+        <!-- End Footer Bottom Area -->
+    </footer>
+
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script type="text/javascript" src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script type="text/javascript">
+
+
+
+        function OnBegin() {
+            $('#btnRegister').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+
+        function OnRegisterSuccess(res) {
+            
+            if (res.response == 'Success') {
+                
+                window.location.href = '/Home/Welcome';
+            }
+            else {
+                
+                $('.form-message').html(res.message);
+                $('#btnRegister').html(`Create Account`);
+            }
+        }
+
+        function OnLoginBegin() {
+            $('#btnLogin').html(`<i class='fa fa-spinner fa-spin'></i> Processing`);
+        }
+
+        function OnLoginSuccess(res) {
+            if (res.response == 'Success') {
+                window.location.href = '/Home/Welcome';
+            }
+            else {
+                $('.form-message').html(res.message);
+                $('#btnLogin').html(`Login`);
+            }
+        }
+    </script>
+    <!--=== All Vendor Js ===-->
+    <script src="~/Themes/Main/assets/js/vendor.js"></script>
+
+    <!--=== All Plugins Js ===-->
+    <script src="~/Themes/Main/assets/js/plugins.js"></script>
+
+    <!--=== Active Js ===-->
+    <script src="~/Themes/Main/assets/js/active.min.js"></script>
+
+    <script src="~/Themes/Main/assets/js/smoothscroll.js"></script>
+
+    <script src="~/Themes/Main/assets/js/fileupload/image-uploader.js"></script>
+
+    <script src="~/Themes/Main/assets/js/responsive-tabs.js"></script>
+    <script src="~/lib/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+
+    <script src="~/Themes/Main/assets/js/jquery.easing.min.js"></script>
+
+
+
+    <script>
+        $('img').on("error", function () {
+            $(this).attr('src', '/themes/main/assets/img/no-photo.jpg');
+        });
+    </script>
+</body>
+</html>

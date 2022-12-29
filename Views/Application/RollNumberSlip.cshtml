@@ -1,0 +1,156 @@
+﻿@model ApplicationViewModel
+@{
+    ViewData["Title"] = "EditApplication";
+    int count = 0;
+}
+
+<input type="hidden" asp-for="ApplicationId" />
+<input type="hidden" asp-for="ApplicantId" />
+<div class="page-header-wrapper  bg-img position-relative">
+    <div class="header-bg-mask"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-11 text-center m-auto pb-150 mb-sm-20">
+                <div class="page-header-content text-white mt-70">
+                    <ul id="progressbar">
+                        @foreach (var feature in Model.Features.Where(x => x.ParentId == null))
+                        {
+                            if (feature.Title == "ROLL NO SLIP")
+                            {
+                                <li class="active" id="@feature.Title" va>@feature.Title</li>
+                                count++;
+                            }
+                            else
+                            {
+                                <li class="" id="@feature.Title" va>@feature.Title</li>
+                                count++;
+                            }
+
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="services-content-wrapper  pb-10 pb-md-10 pb-sm-10 drive-with-us">
+    <div class="container">
+        <div class="row">
+            <div class=" col-12 mx-auto mtm-150 mb-md-30 mb-sm-30  order-lg-1 ">
+                <div class="box " style="background: #eef2f4; border-radius: 0px 0px 0 0; min-width: 253px">
+                    <ul class="d-md-flex justify-content-center align-items-center">
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Applicant Name
+                                <span> @Model.Applicants?.FirstOrDefault(x => x.ApplicantId == Model.ApplicantId)?.ApplicantName</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Class
+                                <span> @Model.AcademicClasses?.FirstOrDefault(x => x.ClassId == Model.ClassId)?.ClassName</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Academic Session
+                                <span> @Model.AcadamicSessions?.FirstOrDefault(x => x.AcadSessionId == Model.AcadSessionId)?.Title</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Course
+                                <span> @Model.Courses?.FirstOrDefault(x => x.CourseId == Model.CourseId)?.Title</span>
+                            </p>
+                        </li>
+                        <li class="h-100">
+                            <p class="my-auto">
+                                Completion Date
+                                <span> @Model.ApprovalDate?.ToString("dd-MM-yyyy")</span>
+                            </p>
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="single-skill-bar mt-0">
+                    <div class="skill-progress progress">
+                        <div class="progress-bar skill-progress-bar" data-skill-amount="10%"></div>
+                    </div>
+                    <div class="skills-info d-flex align-items-center justify-content-between text-white mt-10">
+                        <span class="skill-title">Application Progress</span>
+                        <span class="skill-percent"></span>
+                    </div>
+                </div>
+                <div id="msform">
+                    <fieldset class="h-100 bg-white rounded  shadow-sm text-right position-relative mt-20" style="overflow:hidden">
+                        <div class=" profilepage text-left">
+                            <div class="row ">
+                                <!-- Tab panes -->
+                                <div class="col-lg-12 col-md-12 mb-10 mt-20">
+                                    <div class="col-lg-12 col-md-12 mb-10 mt-20">
+                                        <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" checked>
+                                        <label for="vehicle1" style="display: contents;"> I  <span style="text-decoration:underline">@Model.Applicants?.FirstOrDefault(x => x.ApplicantId == Model.ApplicantId)?.ApplicantName</span> Father / Guardian of  <span style="text-decoration:underline">@Model.FatherName</span> do hereby solemnly undertake and affirm that I have read and understood the rules and regulations as given in the prospectus / website.</label><br>
+                                        <br />
+                                        <input type="checkbox" id="vehicle2" name="vehicle2" value="Car" checked>
+                                        <label for="vehicle2" style="display: contents;"> I do undertake to abide by the rules and regulations and also with the changes incorporated / amended from time to time. I shall abide by the College Rules and accept Principal’s decision in all academic and disciplinary matters concerning my child. I also affirm that all information provided by me in this form is correct and according to the best of my knowledge and belief.</label><br>
+                                        <div class="text-center">
+                                            @if (Model.ApplicantDetail.RollNo == null)
+                                            {
+                                                <h3 class="badge badge-danger text-white" style="font-size:21px;">Roll Number Slip Update Soon</h3>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin: 0;">
+                                <div class="col-lg-6 text-left">
+                                    <a href="/Application/FeePayment?ApplicationId=@Model.ApplicationId" class="btn btn-brand border-radius wow zoomIn action-button"> <i class="fa fa-arrow-left"></i> Back</a>
+                                </div>
+                                <div class="col-lg-6 text-right">
+                                    @if (Model.ApplicantDetail.RollNo != null)
+                                    {
+                                        <a href="/Application/PrintRollNumberSlip?Id=@Model.ApplicationId" class="btn btn-brand border-radius wow zoomIn action-button">  Print <i class="fa fa-print"></i></a>
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<input type="hidden" asp-for="ApplicationId" />
+@section Scripts {
+
+
+
+    <script type="text/javascript">
+        $.validator.unobtrusive.parse('#basic');
+
+        $(function () {
+
+            $(".progress-bar").attr('style', 'width:100% !important');
+            $(".skill-percent").html("100%");
+
+            $('.custom-file-input').on("change", function () {
+                var fileApplicantName = $(this).val().split("\\").pop();
+                $(this).next('.custom-file-label').html(fileApplicantName);
+            });
+        });
+
+
+    </script>
+
+
+
+}
