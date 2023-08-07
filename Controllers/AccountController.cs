@@ -23,7 +23,7 @@ namespace anyweb.Controllers
             var Instructions = await _getApiData.GetInstructions();
             var model = new RegisterViewModel
             {
-                Classes = record.Where(p => p.ApplyingIn == true).ToList(),
+                Classes = record.Where(p => p.Status == true).ToList(),
                 Content = Instructions
             };
             return View(model);
