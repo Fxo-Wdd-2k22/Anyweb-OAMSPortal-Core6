@@ -74,7 +74,7 @@ namespace anyweb.Controllers
                 if (data.Status == "Ok")
                 {
                     HttpContext.Session.SetInt32("UserId", data.ApplicantId);
-                    HttpContext.Session.SetString("Email", data.Email);
+                    HttpContext.Session.SetString("Email", model.Email);
                     HttpContext.Session.SetString("FullName", data.ApplicantName);
 
                     return Json(new { response = "Success", type = "success", title = "Success", message = "Register Success" });

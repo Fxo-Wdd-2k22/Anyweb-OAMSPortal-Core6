@@ -99,7 +99,7 @@
                                             </tr>
                                             <tr>
                                                 <td>Email Address</td>
-                                                <td>@Model.CRMContact.Email</td>
+                                                <td>@HttpContextAccessor.HttpContext.Session.GetString("Email")</td>
                                             </tr>
 
                                         </tbody>
