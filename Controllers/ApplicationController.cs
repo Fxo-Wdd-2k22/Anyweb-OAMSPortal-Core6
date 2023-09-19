@@ -42,7 +42,7 @@ namespace anyweb.Controllers
                 var response2 = await _getApiData.AddApplication("/OnlineApp/AddApplication?ContactId=" + ContactId);
                 ApplicationId = response2.ApplicationId;
             }
-
+            //var applicants =await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true");
             HttpContext.Session.SetInt32("ApplicationId", ApplicationId);
             var response = await _getApiData.GetApplication(ApplicationId, "/OnlineApp/GetApplication?ApplicationId=");
             var result = new ApplicationViewModel
@@ -57,7 +57,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 ApplicantDetail = await _getApiData.GetApplicantDetail($"/OnlineApp/ApplicantDetail?ApplicantId={response.ApplicantId}"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
@@ -152,7 +152,7 @@ namespace anyweb.Controllers
                 IdMark = response.IdMark,
                 Features = await _getApiData.FeaturesAsync("/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={Id}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 Country = await _getApiData.CountryList("/OnlineApp/CountryList?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
@@ -532,7 +532,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
                 Courses = await _getApiData.CoursesAsync("/OnlineApp/Courses?status=true"),
@@ -570,7 +570,7 @@ namespace anyweb.Controllers
                 IdMark = response.IdMark,
                 Features = await _getApiData.FeaturesAsync("/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={Id}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 Country = await _getApiData.CountryList("/OnlineApp/CountryList?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
@@ -692,7 +692,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
                 Courses = await _getApiData.CoursesAsync("/OnlineApp/Courses?status=true"),
@@ -731,7 +731,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
                 Courses = await _getApiData.CoursesAsync("/OnlineApp/Courses?status=true"),
@@ -774,7 +774,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
                 Courses = await _getApiData.CoursesAsync("/OnlineApp/Courses?status=true"),
@@ -823,7 +823,7 @@ namespace anyweb.Controllers
                 Description = response.Description,
                 Features = await _getApiData.FeaturesAsync($"/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={ApplicationId}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+                //Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),
                 Courses = await _getApiData.CoursesAsync("/OnlineApp/Courses?status=true"),
@@ -942,7 +942,7 @@ namespace anyweb.Controllers
                 IdMark = response.IdMark,
                 Features = await _getApiData.FeaturesAsync("/OnlineApp/Features?status=true"),
                 ApplicationFeature = await _getApiData.GetApplicationStatus($"/OnlineApp/GetApplicationStatus?ApplicationId={Id}"),
-                Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
+               // Applicants = await _getApiData.GetApplicantsAsync("/OnlineApp/Applicants?status=true"),
                 AcadamicSessions = await _getApiData.AcademicSessionsAsync("/OnlineApp/AcademicSessions?status=true"),
                 Country = await _getApiData.CountryList("/OnlineApp/CountryList?status=true"),
                 AcademicClasses = await _getApiData.AcademicClassesAsync("/OnlineApp/AcademicClasses?status=true"),

@@ -54,7 +54,7 @@
             <label class="control-label">Class</label>
             <select asp-for="ClassId" class="nice-select" onchange="CheckCourseCombination()" id="ClassId">
                 <option value="">Select Class</option>
-                @foreach (var item in Model.AcademicClasses.Where(p => p.ApplyingIn == true))
+                @foreach (var item in Model.AcademicClasses.Where(p => p.ApplyingIn == true &&  p.Status == true && p.ClassName != "11th"))
                 {
                     <option value="@item.ClassId">@item.ClassName</option>
                 }

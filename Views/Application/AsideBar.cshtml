@@ -159,7 +159,8 @@
              $(".skill-percent").html("100%");
 
          }
-         if (@Model.Approved == true)
+          var isApproved = @Html.Raw(Model.Approved.ToString().ToLower());
+         if (isApproved === true)
          {
              $(".action-button").css("display", "none");
            $(".progress-bar").attr('style', 'width:100% !important');
