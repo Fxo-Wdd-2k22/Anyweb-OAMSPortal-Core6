@@ -314,7 +314,7 @@
                                                     <div class="form-input-item rounded">
                                                         <label>Class <span class="text-danger">*</span></label>
                                                         <select class="nice-select mb-12" asp-for="ClassId"
-                                                                asp-items="Model.Classes.Select(x=> new SelectListItem { Text = x.ClassName, Value = x.ClassId.ToString() })">
+                                                                asp-items='Model.Classes.Select(x=> new SelectListItem { Text = x.ClassName, Value = x.ClassId.ToString() }).Where(w=>!w.Text.Contains("10"))'>
                                                             <option selected>Select Class </option>
                                                         </select>
                                                     </div>
